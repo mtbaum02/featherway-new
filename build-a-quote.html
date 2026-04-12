@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Build a detailed window quote for your Metro Detroit home. Select window styles, sizes, and options — we'll send your price within 24 hours.">
+<title>Build A Quote — Featherway Windows</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f2137; --navy-mid: #1a3a5c; --accent: #2563eb; --accent-light: #3b82f6;
+    --sky: #e8f4fd; --text: #1a2b3c; --muted: #64748b; --border: #e2e8f0;
+    --white: #ffffff; --off-white: #f8fafc; --green: #16a34a; --green-light: #dcfce7;
+    --red: #dc2626; --red-light: #fef2f2;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--off-white); -webkit-font-smoothing: antialiased; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 40px; height: 84px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo img { height: 65px; width: auto; }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-cta { background: var(--accent); color: var(--white) !important; padding: 10px 22px; border-radius: 6px; font-weight: 600 !important; }
+  .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); margin: 5px 0; border-radius: 2px; }
+  .mobile-menu { display: none; }
+
+  .page-wrap { padding-top: 84px; }
+
+  .page-hero { background: var(--navy); padding: 56px 40px 72px; text-align: center; }
+  .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(26px, 4vw, 42px); font-weight: 800; color: var(--white); letter-spacing: -0.5px; margin-bottom: 12px; }
+  .page-hero p { font-size: 16px; color: rgba(255,255,255,0.65); max-width: 500px; margin: 0 auto; line-height: 1.6; }
+
+  .main-wrap { max-width: 860px; margin: -36px auto 60px; padding: 0 24px; }
+
+  /* PROGRESS */
+  .progress-bar { background: var(--white); border-radius: 12px 12px 0 0; border: 1px solid var(--border); border-bottom: none; padding: 20px 28px; display: flex; align-items: center; justify-content: space-between; }
+  .progress-label { font-size: 13px; font-weight: 600; color: var(--navy); }
+  .progress-count { font-size: 13px; color: var(--muted); }
+  .progress-track { height: 4px; background: var(--border); border-radius: 2px; margin: 0; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.4s ease; }
+
+  /* WINDOWS LIST */
+  .windows-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 16px; }
+
+  .window-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+
+  .window-card:hover { box-shadow: 0 4px 20px rgba(15,33,55,0.07); }
+
+  .window-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: var(--off-white);
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .window-card-header:hover { background: var(--sky); }
+
+  .window-card-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .window-num {
+    width: 28px; height: 28px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .window-summary { font-size: 14px; font-weight: 600; color: var(--navy); }
+  .window-summary-sub { font-size: 12px; color: var(--muted); margin-top: 1px; }
+
+  .window-card-actions { display: flex; align-items: center; gap: 8px; }
+
+  .icon-btn {
+    width: 32px; height: 32px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.15s;
+    color: var(--muted);
+  }
+
+  .icon-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--sky); }
+  .icon-btn.delete:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
+
+  .chevron { font-size: 12px; color: var(--muted); transition: transform 0.2s; margin-left: 4px; }
+  .window-card.open .chevron { transform: rotate(180deg); }
+
+  .window-card-body { display: none; padding: 24px; }
+  .window-card.open .window-card-body { display: block; }
+
+  /* FORM FIELDS */
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .field-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .field-full { margin-bottom: 20px; }
+
+  .field-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .field-input {
+    width: 100%;
+    background: var(--off-white);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 11px 14px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .field-input:focus { border-color: var(--accent); background: var(--white); }
+  .field-input::placeholder { color: #b0bec5; }
+
+  .field-select {
+    width: 100%;
+    background: var(--off-white);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 11px 14px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    transition: border-color 0.2s;
+  }
+
+  .field-select:focus { border-color: var(--accent); background-color: var(--white); }
+
+  /* VISUAL STYLE PICKER */
+  .style-picker { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 4px; }
+  .style-picker-wide { grid-template-columns: repeat(3, 1fr); }
+
+  .style-option {
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 8px 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s;
+    background: var(--white);
+  }
+
+  .style-option:hover { border-color: var(--accent); background: var(--sky); }
+  .style-option.selected { border-color: var(--accent); background: var(--sky); }
+  .style-option.selected .style-name { color: var(--accent); font-weight: 700; }
+
+  .style-icon { margin-bottom: 6px; }
+  .style-name { font-size: 11px; font-weight: 600; color: var(--navy); line-height: 1.3; }
+
+  /* SVG window icons */
+  svg.win-icon { width: 44px; height: 44px; display: block; margin: 0 auto; }
+
+  /* GLASS OPTIONS */
+  .glass-picker { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  .glass-option {
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--white);
+  }
+
+  .glass-option:hover { border-color: var(--accent); background: var(--sky); }
+  .glass-option.selected { border-color: var(--accent); background: var(--sky); }
+
+  .glass-name { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+  .glass-desc { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+  /* SECTION DIVIDER */
+  .section-divider { height: 1px; background: var(--border); margin: 20px 0; }
+
+  .sub-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; display: block; }
+
+  /* BLINDS TOGGLE */
+  .toggle-row { display: flex; gap: 10px; }
+  .toggle-opt {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--white);
+  }
+  .toggle-opt:hover { border-color: var(--accent); }
+  .toggle-opt.selected { border-color: var(--accent); background: var(--sky); color: var(--accent); }
+
+  /* ADD WINDOW BTN */
+  .add-window-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px;
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    background: var(--white);
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 24px;
+  }
+
+  .add-window-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--sky); }
+
+  /* CONTACT + SUBMIT */
+  .contact-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin-bottom: 16px; }
+  .contact-card-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+  .contact-card-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
+
+  /* SAVE BANNER */
+  .save-banner {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .save-banner span { font-size: 13px; color: var(--muted); }
+  .save-banner strong { color: var(--navy); }
+
+  .save-btn {
+    padding: 8px 18px;
+    background: var(--off-white);
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .save-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .saved-indicator { font-size: 12px; color: var(--green); font-weight: 600; display: none; }
+
+  /* SUBMIT */
+  .submit-btn {
+    display: block;
+    width: 100%;
+    background: var(--accent);
+    color: var(--white);
+    padding: 18px 32px;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(37,99,235,0.25);
+  }
+
+  .submit-btn:hover { background: var(--accent-light); transform: translateY(-1px); }
+  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  .form-error { color: var(--red); font-size: 13px; padding: 10px 14px; background: var(--red-light); border-radius: 6px; border: 1px solid #fecaca; margin-bottom: 16px; display: none; }
+
+  /* SUCCESS */
+  .success-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 48px 32px; text-align: center; }
+  .success-icon { width: 72px; height: 72px; background: var(--green-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto 24px; }
+  .success-card h2 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 800; color: var(--navy); margin-bottom: 12px; }
+  .success-card p { font-size: 16px; color: var(--muted); line-height: 1.7; margin-bottom: 28px; max-width: 400px; margin-left: auto; margin-right: auto; }
+
+  .btn-primary-inline {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent); color: var(--white);
+    padding: 14px 28px; border-radius: 8px;
+    font-size: 15px; font-weight: 600; text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-primary-inline:hover { background: var(--accent-light); transform: translateY(-1px); }
+
+  footer { background: var(--white); border-top: 1px solid var(--border); padding: 40px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+  .footer-logo img { height: 32px; width: auto; }
+  .footer-links { display: flex; gap: 28px; list-style: none; flex-wrap: wrap; }
+  .footer-links a { text-decoration: none; color: var(--muted); font-size: 13px; font-weight: 500; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--navy); }
+  .footer-copy { font-size: 12px; color: var(--muted); width: 100%; text-align: center; padding-top: 24px; border-top: 1px solid var(--border); margin-top: 24px; }
+
+  @media (max-width: 640px) {
+    .field-row, .field-row-3 { grid-template-columns: 1fr; }
+    .style-picker { grid-template-columns: repeat(3, 1fr); }
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: block; }
+    .mobile-menu.open { display: flex; flex-direction: column; position: fixed; top: 84px; left: 0; right: 0; background: white; border-bottom: 1px solid var(--border); padding: 20px 24px; gap: 20px; z-index: 99; }
+    .mobile-menu.open a { text-decoration: none; color: var(--navy); font-size: 16px; font-weight: 500; padding: 8px 0; border-bottom: 1px solid var(--border); }
+    .mobile-menu.open .nav-cta { background: var(--accent); color: white !important; padding: 14px 20px; border-radius: 8px; text-align: center; border: none; }
+    .contact-card, .main-wrap { padding: 0 16px; }
+    .contact-card { padding: 24px 20px; }
+    footer { padding: 40px 24px; }
+    .page-hero { padding: 48px 24px 64px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="featherway-logo.png" alt="Featherway Windows"></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="pella.html">Pella Windows</a></li>
+    <li><a href="quick-quote.html">Quick Quote</a></li>
+    <li><a href="build-a-quote.html" class="nav-cta">Build A Quote</a></li>
+  </ul>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="about.html">About Us</a>
+  <a href="pella.html">Pella Windows</a>
+  <a href="quick-quote.html">Quick Quote</a>
+  <a href="build-a-quote.html" class="nav-cta">Build A Quote</a>
+</div>
+
+<div class="page-wrap">
+  <div class="page-hero">
+    <h1>Build A Quote</h1>
+    <p>Add each window, choose your style and options. We'll review it and send your price within 24 hours.</p>
+  </div>
+
+  <div class="main-wrap" id="mainWrap">
+
+    <div class="progress-bar">
+      <span class="progress-label" id="progressLabel">0 windows added</span>
+      <span class="progress-count" id="progressCount"></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+
+    <!-- SAVE BANNER -->
+    <div style="height:12px"></div>
+    <div class="save-banner">
+      <span><strong>Your progress is auto-saved</strong> — you can close this page and come back anytime.</span>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span class="saved-indicator" id="savedIndicator">✓ Saved</span>
+        <button class="save-btn" onclick="saveProgress()">Save Now</button>
+        <button class="save-btn" style="color:var(--red);border-color:var(--border)" onclick="clearSaved()">Clear Saved</button>
+      </div>
+    </div>
+
+    <!-- WINDOWS LIST -->
+    <div class="windows-list" id="windowsList"></div>
+
+    <button class="add-window-btn" onclick="addWindow()">
+      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+      Add a Window
+    </button>
+
+    <!-- CONTACT SECTION -->
+    <div class="contact-card">
+      <div class="contact-card-title">Your Contact Information</div>
+      <div class="contact-card-sub">We'll send your detailed quote to this email within 24 hours. No spam, no follow-up calls unless you want them.</div>
+      <div class="field-row">
+        <div>
+          <label class="field-label">First Name</label>
+          <input type="text" class="field-input" id="cFirstName" placeholder="Mike">
+        </div>
+        <div>
+          <label class="field-label">Last Name</label>
+          <input type="text" class="field-input" id="cLastName" placeholder="Smith">
+        </div>
+      </div>
+      <div class="field-row">
+        <div>
+          <label class="field-label">Email</label>
+          <input type="email" class="field-input" id="cEmail" placeholder="you@example.com">
+        </div>
+        <div>
+          <label class="field-label">Phone</label>
+          <input type="tel" class="field-input" id="cPhone" placeholder="(734) 555-0100">
+        </div>
+      </div>
+      <div>
+        <label class="field-label">Home Address</label>
+        <input type="text" class="field-input" id="cAddress" placeholder="123 Main St, Plymouth, MI">
+      </div>
+      <div style="margin-top:16px">
+        <label class="field-label">Notes (optional)</label>
+        <textarea class="field-input" id="cNotes" rows="3" placeholder="Any details we should know — existing window conditions, special requests, etc." style="resize:vertical"></textarea>
+      </div>
+    </div>
+
+    <div class="form-error" id="formError"></div>
+
+    <button class="submit-btn" onclick="submitQuote()" id="submitBtn">
+      Submit My Quote Request →
+    </button>
+
+    <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:12px">We'll review your selections and respond within 24 hours with accurate pricing.</p>
+  </div>
+
+  <!-- SUCCESS (hidden) -->
+  <div class="main-wrap" id="successWrap" style="display:none">
+    <div class="success-card">
+      <div class="success-icon">✓</div>
+      <h2>Quote request received!</h2>
+      <p>Thanks — we'll review your window selections and send your detailed price to <strong id="confirmEmail"></strong> within 24 hours.</p>
+      <a href="index.html" class="btn-primary-inline">Back to Home</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo"><img src="featherway-logo.png" alt="Featherway Windows"></a>
+    <ul class="footer-links">
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="pella.html">Pella Windows</a></li>
+      <li><a href="quick-quote.html">Quick Quote</a></li>
+      <li><a href="build-a-quote.html">Build A Quote</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 Featherway Windows. Pella® is a registered trademark of Pella Corporation. Featherway is an independent installer and is not affiliated with or endorsed by Pella Corporation.</p>
+  </div>
+</footer>
+
+<script>
+// ── CONFIG ────────────────────────────────────────────────────────────────────
+const FORMSPREE_URL = 'https://formspree.io/f/mdaynzpn'; // replace with your Formspree endpoint
+
+// ── DATA ──────────────────────────────────────────────────────────────────────
+let windows = [];
+let nextId = 1;
+
+const SERIES = {
+  impervia: { label: 'Impervia', sub: 'Fiberglass' },
+  series250: { label: '250 Series', sub: 'Vinyl' },
+  lifestyle: { label: 'Lifestyle', sub: 'Wood / Aluminum Clad' }
+};
+
+const WINDOW_TYPES = {
+  impervia: ['picture','casement','hung','slider','awning','bay','patio_door'],
+  series250: ['picture','casement','hung','slider','awning','bay','patio_door'],
+  lifestyle: ['picture','casement','hung','awning','bay','patio_door']
+};
+
+const TYPE_LABELS = {
+  picture: 'Picture', casement: 'Casement', hung: 'Hung',
+  slider: 'Slider', awning: 'Awning', bay: 'Bay Window', patio_door: 'Patio Door'
+};
+
+const TYPE_DESCS = {
+  picture: 'Fixed, non-opening', casement: 'Hinged, cranks open', hung: 'Slides up & down',
+  slider: 'Slides side to side', awning: 'Hinged at top, opens out', bay: 'Projects outward',
+  patio_door: 'Sliding glass door'
+};
+
+// SVG icons for each window type
+const TYPE_ICONS = {
+  picture: `<svg class="win-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="4" y="4" width="36" height="36" rx="2" stroke="#0f2137" stroke-width="2"/>
+    <rect x="8" y="8" width="28" height="28" rx="1" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="3 2"/>
+  </svg>`,
+  casement: `<svg class="win-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="4" y="4" width="36" height="36" rx="2" stroke="#0f2137" stroke-width="2"/>
+    <line x1="22" y1="4" x2="22" y2="40" stroke="#0f2137" stroke-width="1.5"/>
+    <path d="M24 12 L36 22 L24 32" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>`,
+  hung: `<svg class="win-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="4" y="4" width="36" height="36" rx="2" stroke="#0f2137" stroke-width="2"/>
+    <line x1="4" y1="22" x2="40" y2="22" stroke="#0f2137" stroke-width="1.5"/>
+    <path d="M16 18 L22 12 L28 18" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M16 26 L22 32 L28 26" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>`,
+  slider: `<svg class="win-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="4" y="4" width="36" height="36" rx="2" stroke="#0f2137" stroke-width="2"/>
+    <line x1="22" y1="4" x2="22" y2="40" stroke="#0f2137" stroke-width="1.5"/>
+    <path d="M12 22 L6 22 M12 18 L6 24" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M32 22 L38 22 M32 18 L38 24" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>`,
+  awning: `<svg class="win-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="4" y="4" width="36" height="36" rx="2" stroke="#0f2137" stroke-width="2"/>
+    <line x1="4" y1="16" x2="40" y2="16" stroke="#0f2137" stroke-width="1.5"/>
+    <path d="M10 16 L22 36 L34 16" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+  </svg>`,
+  bay: `<svg class="win-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="12" width="12" height="24" rx="1" stroke="#0f2137" stroke-width="1.5"/>
+    <rect x="16" y="6" width="12" height="32" rx="1" stroke="#0f2137" stroke-width="2"/>
+    <rect x="30" y="12" width="12" height="24" rx="1" stroke="#0f2137" stroke-width="1.5"/>
+    <line x1="14" y1="16" x2="16" y2="14" stroke="#0f2137" stroke-width="1.5"/>
+    <line x1="30" y1="14" x2="32" y2="16" stroke="#0f2137" stroke-width="1.5"/>
+  </svg>`,
+  patio_door: `<svg class="win-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="4" width="40" height="38" rx="2" stroke="#0f2137" stroke-width="2"/>
+    <line x1="22" y1="4" x2="22" y2="42" stroke="#0f2137" stroke-width="1.5"/>
+    <circle cx="19" cy="22" r="2" fill="#2563eb"/>
+    <path d="M10 22 L6 18 M10 22 L6 26" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>`
+};
+
+// Sub-options
+const SUB_OPTIONS = {
+  picture: { label: 'Shape', options: ['Rectangle', 'Curved Top', 'Angled Top'] },
+  casement: { label: 'Configuration', options: ['Single Casement', 'Double Casement', 'Triple Casement', '4-Wide Casement'] },
+  hung: { label: 'Configuration', options: ['Single Hung', 'Double Hung'] },
+  slider: { label: 'Configuration', options: ['2-Panel Slider', '3-Panel Slider', '4-Panel Slider'] },
+  awning: null,
+  bay: null,
+  patio_door: { label: 'Configuration', options: ['2-Panel Door', '3-Panel Door'] }
+};
+
+// ── WINDOW MANAGEMENT ─────────────────────────────────────────────────────────
+function addWindow(copyFrom = null) {
+  const id = nextId++;
+  const w = copyFrom ? JSON.parse(JSON.stringify({ ...copyFrom, id })) : {
+    id, location: '', width: '', height: '',
+    series: '', type: '', subOption: '', glass: '', blinds: ''
+  };
+  windows.push(w);
+  renderWindows();
+  updateProgress();
+  autoSave();
+  // Open the new window card
+  setTimeout(() => {
+    const card = document.getElementById('wcard-' + id);
+    if (card) { card.classList.add('open'); card.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+  }, 50);
+}
+
+function removeWindow(id) {
+  if (windows.length === 1) { alert('You need at least one window.'); return; }
+  windows = windows.filter(w => w.id !== id);
+  renderWindows();
+  updateProgress();
+  autoSave();
+}
+
+function copyWindow(id) {
+  const w = windows.find(w => w.id === id);
+  if (w) addWindow(w);
+}
+
+function toggleCard(id) {
+  const card = document.getElementById('wcard-' + id);
+  card.classList.toggle('open');
+}
+
+function updateField(id, field, value) {
+  const w = windows.find(w => w.id === id);
+  if (!w) return;
+  w[field] = value;
+  // Reset downstream fields when series or type changes
+  if (field === 'series') { w.type = ''; w.subOption = ''; w.glass = ''; w.blinds = ''; }
+  if (field === 'type') { w.subOption = ''; w.blinds = ''; }
+  renderWindows();
+  autoSave();
+  updateProgress();
+  // Keep card open
+  setTimeout(() => {
+    const card = document.getElementById('wcard-' + id);
+    if (card) card.classList.add('open');
+  }, 10);
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────────────
+function renderWindows() {
+  const list = document.getElementById('windowsList');
+  if (windows.length === 0) { list.innerHTML = ''; return; }
+
+  list.innerHTML = windows.map((w, idx) => {
+    const seriesLabel = w.series ? SERIES[w.series]?.label : '';
+    const typeLabel = w.type ? TYPE_LABELS[w.type] : '';
+    const summaryMain = w.location || ('Window ' + (idx + 1));
+    const summarySub = [seriesLabel, typeLabel, w.width && w.height ? w.width + '" × ' + w.height + '"' : ''].filter(Boolean).join(' · ');
+
+    return `<div class="window-card" id="wcard-${w.id}">
+      <div class="window-card-header" onclick="toggleCard(${w.id})">
+        <div class="window-card-title">
+          <div class="window-num">${idx + 1}</div>
+          <div>
+            <div class="window-summary">${summaryMain}</div>
+            <div class="window-summary-sub">${summarySub || 'Tap to configure'}</div>
+          </div>
+        </div>
+        <div class="window-card-actions" onclick="event.stopPropagation()">
+          <div class="icon-btn" onclick="copyWindow(${w.id})" title="Duplicate this window">⧉</div>
+          <div class="icon-btn delete" onclick="removeWindow(${w.id})" title="Remove">✕</div>
+          <span class="chevron">▾</span>
+        </div>
+      </div>
+      <div class="window-card-body">
+        ${renderWindowBody(w)}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderWindowBody(w) {
+  let html = '';
+
+  // Location + Size
+  html += `<div class="field-row">
+    <div>
+      <label class="field-label">Room / Location</label>
+      <input type="text" class="field-input" placeholder="e.g. Master Bedroom" value="${w.location}" oninput="updateField(${w.id},'location',this.value)">
+    </div>
+    <div>
+      <label class="field-label">Approx. Size (inches)</label>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input type="number" class="field-input" placeholder='W"' value="${w.width}" min="6" max="120" style="text-align:center" oninput="updateField(${w.id},'width',this.value)">
+        <span style="color:var(--muted);font-weight:500;flex-shrink:0">×</span>
+        <input type="number" class="field-input" placeholder='H"' value="${w.height}" min="6" max="120" style="text-align:center" oninput="updateField(${w.id},'height',this.value)">
+      </div>
+    </div>
+  </div>`;
+
+  html += `<div class="section-divider"></div>`;
+
+  // Series selector
+  html += `<span class="sub-label">Window Series</span>
+  <div class="style-picker style-picker-wide" style="margin-bottom:20px">
+    ${Object.entries(SERIES).map(([key, s]) => `
+      <div class="style-option ${w.series === key ? 'selected' : ''}" onclick="updateField(${w.id},'series','${key}')">
+        <div style="font-size:22px;margin-bottom:4px">${key === 'impervia' ? '🔷' : key === 'series250' ? '⬜' : '🪵'}</div>
+        <div class="style-name">${s.label}<br><span style="font-weight:400;color:var(--muted)">${s.sub}</span></div>
+      </div>`).join('')}
+  </div>`;
+
+  if (!w.series) return html;
+
+  html += `<div class="section-divider"></div>`;
+
+  // Window type picker
+  html += `<span class="sub-label">Window Style</span>
+  <div class="style-picker" style="margin-bottom:20px">
+    ${WINDOW_TYPES[w.series].map(type => `
+      <div class="style-option ${w.type === type ? 'selected' : ''}" onclick="updateField(${w.id},'type','${type}')">
+        <div class="style-icon">${TYPE_ICONS[type]}</div>
+        <div class="style-name">${TYPE_LABELS[type]}</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px">${TYPE_DESCS[type]}</div>
+      </div>`).join('')}
+  </div>`;
+
+  if (!w.type) return html;
+
+  html += `<div class="section-divider"></div>`;
+
+  // Sub-options (if applicable)
+  const subOpts = SUB_OPTIONS[w.type];
+  if (subOpts) {
+    html += `<span class="sub-label">${subOpts.label}</span>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px">
+      ${subOpts.options.map(opt => `
+        <div class="toggle-opt ${w.subOption === opt ? 'selected' : ''}" onclick="updateField(${w.id},'subOption','${opt}')" style="flex:unset;padding:10px 16px">
+          ${opt}
+        </div>`).join('')}
+    </div>`;
+    html += `<div class="section-divider"></div>`;
+  }
+
+  // Patio door blinds option
+  if (w.type === 'patio_door') {
+    html += `<span class="sub-label">Blinds Between the Glass?</span>
+    <div class="toggle-row" style="margin-bottom:20px">
+      <div class="toggle-opt ${w.blinds === 'yes' ? 'selected' : ''}" onclick="updateField(${w.id},'blinds','yes')">Yes — Add Blinds</div>
+      <div class="toggle-opt ${w.blinds === 'no' ? 'selected' : ''}" onclick="updateField(${w.id},'blinds','no')">No Thanks</div>
+    </div>
+    <div class="section-divider"></div>`;
+  }
+
+  // Glass options (all types)
+  html += `<span class="sub-label">Glass Package</span>
+  <div class="glass-picker" style="margin-bottom:4px">
+    <div class="glass-option ${w.glass === 'double' ? 'selected' : ''}" onclick="updateField(${w.id},'glass','double')">
+      <div class="glass-name">Double Pane Low-E</div>
+      <div class="glass-desc">Energy efficient · most popular · great for Michigan winters</div>
+    </div>
+    <div class="glass-option ${w.glass === 'triple' ? 'selected' : ''}" onclick="updateField(${w.id},'glass','triple')">
+      <div class="glass-name">Triple Pane Low-E</div>
+      <div class="glass-desc">Maximum insulation · quietest · ideal for busy roads or extreme cold</div>
+    </div>
+  </div>`;
+
+  // Completion indicator
+  const complete = isWindowComplete(w);
+  if (complete) {
+    html += `<div style="margin-top:16px;padding:10px 14px;background:var(--green-light);border-radius:8px;font-size:13px;font-weight:600;color:var(--green)">✓ This window is complete</div>`;
+  }
+
+  return html;
+}
+
+function isWindowComplete(w) {
+  if (!w.location || !w.width || !w.height || !w.series || !w.type || !w.glass) return false;
+  const subOpts = SUB_OPTIONS[w.type];
+  if (subOpts && !w.subOption) return false;
+  if (w.type === 'patio_door' && !w.blinds) return false;
+  return true;
+}
+
+function updateProgress() {
+  const total = windows.length;
+  const complete = windows.filter(isWindowComplete).length;
+  document.getElementById('progressLabel').textContent = total === 0 ? 'No windows added yet' : total + (total === 1 ? ' window' : ' windows') + ' added';
+  document.getElementById('progressCount').textContent = total > 0 ? complete + ' of ' + total + ' complete' : '';
+  const pct = total > 0 ? (complete / total) * 100 : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+// ── SAVE / LOAD ───────────────────────────────────────────────────────────────
+let autoSaveTimer = null;
+
+function autoSave() {
+  clearTimeout(autoSaveTimer);
+  autoSaveTimer = setTimeout(() => { saveProgress(true); }, 1500);
+}
+
+function saveProgress(silent = false) {
+  const data = {
+    windows,
+    nextId,
+    contact: {
+      firstName: document.getElementById('cFirstName').value,
+      lastName: document.getElementById('cLastName').value,
+      email: document.getElementById('cEmail').value,
+      phone: document.getElementById('cPhone').value,
+      address: document.getElementById('cAddress').value,
+      notes: document.getElementById('cNotes').value
+    },
+    savedAt: new Date().toISOString()
+  };
+  localStorage.setItem('featherway_baq', JSON.stringify(data));
+  if (!silent) {
+    const ind = document.getElementById('savedIndicator');
+    ind.style.display = 'inline';
+    setTimeout(() => { ind.style.display = 'none'; }, 2000);
+  }
+}
+
+function loadSaved() {
+  try {
+    const raw = localStorage.getItem('featherway_baq');
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    windows = data.windows || [];
+    nextId = data.nextId || (windows.length + 1);
+    if (data.contact) {
+      document.getElementById('cFirstName').value = data.contact.firstName || '';
+      document.getElementById('cLastName').value = data.contact.lastName || '';
+      document.getElementById('cEmail').value = data.contact.email || '';
+      document.getElementById('cPhone').value = data.contact.phone || '';
+      document.getElementById('cAddress').value = data.contact.address || '';
+      document.getElementById('cNotes').value = data.contact.notes || '';
+    }
+    renderWindows();
+    updateProgress();
+  } catch(e) { console.log('No saved data'); }
+}
+
+function clearSaved() {
+  if (!confirm('Clear all saved progress and start over?')) return;
+  localStorage.removeItem('featherway_baq');
+  windows = [];
+  nextId = 1;
+  document.getElementById('cFirstName').value = '';
+  document.getElementById('cLastName').value = '';
+  document.getElementById('cEmail').value = '';
+  document.getElementById('cPhone').value = '';
+  document.getElementById('cAddress').value = '';
+  document.getElementById('cNotes').value = '';
+  renderWindows();
+  updateProgress();
+}
+
+// Auto-save contact fields too
+['cFirstName','cLastName','cEmail','cPhone','cAddress','cNotes'].forEach(id => {
+  document.getElementById(id).addEventListener('input', () => autoSave());
+});
+
+// ── SUBMIT ────────────────────────────────────────────────────────────────────
+async function submitQuote() {
+  const errEl = document.getElementById('formError');
+  errEl.style.display = 'none';
+
+  if (windows.length === 0) { errEl.textContent = 'Please add at least one window before submitting.'; errEl.style.display = 'block'; return; }
+
+  const incomplete = windows.filter(w => !isWindowComplete(w));
+  if (incomplete.length > 0) {
+    errEl.textContent = `${incomplete.length} window${incomplete.length > 1 ? 's are' : ' is'} incomplete. Please finish all window configurations before submitting.`;
+    errEl.style.display = 'block';
+    // Open first incomplete card
+    const card = document.getElementById('wcard-' + incomplete[0].id);
+    if (card) { card.classList.add('open'); card.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    return;
+  }
+
+  const firstName = document.getElementById('cFirstName').value.trim();
+  const lastName = document.getElementById('cLastName').value.trim();
+  const email = document.getElementById('cEmail').value.trim();
+  const phone = document.getElementById('cPhone').value.trim();
+  const address = document.getElementById('cAddress').value.trim();
+
+  if (!firstName || !lastName) { errEl.textContent = 'Please enter your name.'; errEl.style.display = 'block'; return; }
+  if (!email || !email.includes('@')) { errEl.textContent = 'Please enter a valid email address.'; errEl.style.display = 'block'; return; }
+  if (!phone) { errEl.textContent = 'Please enter your phone number.'; errEl.style.display = 'block'; return; }
+  if (!address) { errEl.textContent = 'Please enter your home address.'; errEl.style.display = 'block'; return; }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  // Build window summary for email
+  const windowSummary = windows.map((w, i) => {
+    const series = SERIES[w.series]?.label || w.series;
+    const type = TYPE_LABELS[w.type] || w.type;
+    const sub = w.subOption ? ` — ${w.subOption}` : '';
+    const glass = w.glass === 'double' ? 'Double Pane Low-E' : 'Triple Pane Low-E';
+    const blinds = w.type === 'patio_door' ? ` | Blinds: ${w.blinds === 'yes' ? 'Yes' : 'No'}` : '';
+    return `Window ${i+1}: ${w.location} | ${w.width}" × ${w.height}" | ${series} ${type}${sub} | ${glass}${blinds}`;
+  }).join('\n');
+
+  const payload = {
+    name: `${firstName} ${lastName}`,
+    email, phone, address,
+    windows: windowSummary,
+    window_count: windows.length,
+    notes: document.getElementById('cNotes').value,
+    submitted_at: new Date().toLocaleString('en-US', { timeZone: 'America/Detroit' })
+  };
+
+  try {
+    if (FORMSPREE_URL === 'https://formspree.io/f/mdaynzpn') {
+      // Demo mode — no real submission
+      console.log('Quote payload:', payload);
+      await new Promise(r => setTimeout(r, 800));
+    } else {
+      const res = await fetch(FORMSPREE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error('Submission failed');
+    }
+
+    localStorage.removeItem('featherway_baq');
+    document.getElementById('confirmEmail').textContent = email;
+    document.getElementById('mainWrap').style.display = 'none';
+    document.getElementById('successWrap').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  } catch(e) {
+    errEl.textContent = 'Something went wrong. Please try again or email us directly at mike@featherway.io';
+    errEl.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Submit My Quote Request →';
+  }
+}
+
+// ── NAV ───────────────────────────────────────────────────────────────────────
+function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+document.addEventListener('click', e => {
+  if (!e.target.closest('nav') && !e.target.closest('#mobileMenu'))
+    document.getElementById('mobileMenu').classList.remove('open');
+});
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+loadSaved();
+if (windows.length === 0) addWindow();
+</script>
+</body>
+</html>
