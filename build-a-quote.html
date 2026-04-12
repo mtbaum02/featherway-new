@@ -595,21 +595,24 @@ function toggleCard(id) {
   card.classList.toggle('open');
 }
 
-function updateField(id, field, value) {
+function updateField(id, field, value, rerender = true) {
   const w = windows.find(w => w.id === id);
   if (!w) return;
   w[field] = value;
   // Reset downstream fields when series or type changes
   if (field === 'series') { w.type = ''; w.subOption = ''; w.glass = ''; w.blinds = ''; }
   if (field === 'type') { w.subOption = ''; w.blinds = ''; }
-  renderWindows();
+  // Only re-render for selection changes, not text input
+  if (rerender) {
+    renderWindows();
+    updateProgress();
+    // Keep card open
+    setTimeout(() => {
+      const card = document.getElementById('wcard-' + id);
+      if (card) card.classList.add('open');
+    }, 10);
+  }
   autoSave();
-  updateProgress();
-  // Keep card open
-  setTimeout(() => {
-    const card = document.getElementById('wcard-' + id);
-    if (card) card.classList.add('open');
-  }, 10);
 }
 
 // ── RENDER ────────────────────────────────────────────────────────────────────
@@ -652,14 +655,14 @@ function renderWindowBody(w) {
   html += `<div class="field-row">
     <div>
       <label class="field-label">Room / Location</label>
-      <input type="text" class="field-input" placeholder="e.g. Master Bedroom" value="${w.location}" oninput="updateField(${w.id},'location',this.value)">
+      <input type="text" class="field-input" placeholder="e.g. Master Bedroom" value="${w.location}" oninput="updateField(${w.id},'location',this.value,false)" onchange="updateProgress()">
     </div>
     <div>
       <label class="field-label">Approx. Size (inches)</label>
       <div style="display:flex;gap:8px;align-items:center">
-        <input type="number" class="field-input" placeholder='W"' value="${w.width}" min="6" max="120" style="text-align:center" oninput="updateField(${w.id},'width',this.value)">
+        <input type="number" class="field-input" placeholder='W"' value="${w.width}" min="6" max="120" style="text-align:center" oninput="updateField(${w.id},'width',this.value,false)" onchange="updateProgress()">
         <span style="color:var(--muted);font-weight:500;flex-shrink:0">×</span>
-        <input type="number" class="field-input" placeholder='H"' value="${w.height}" min="6" max="120" style="text-align:center" oninput="updateField(${w.id},'height',this.value)">
+        <input type="number" class="field-input" placeholder='H"' value="${w.height}" min="6" max="120" style="text-align:center" oninput="updateField(${w.id},'height',this.value,false)" onchange="updateProgress()">
       </div>
     </div>
   </div>`;
