@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Featherway Windows was built to make window replacement simpler, more transparent, and less stressful for Metro Detroit homeowners.">
+<title>About Us — Featherway Windows</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f2137; --navy-mid: #1a3a5c; --accent: #2563eb; --accent-light: #3b82f6;
+    --sky: #e8f4fd; --text: #1a2b3c; --muted: #64748b; --border: #e2e8f0;
+    --white: #ffffff; --off-white: #f8fafc;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); -webkit-font-smoothing: antialiased; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 40px; height: 84px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo img { height: 65px; width: auto; }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-cta { background: var(--accent); color: var(--white) !important; padding: 10px 22px; border-radius: 6px; font-weight: 600 !important; }
+  .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); margin: 5px 0; border-radius: 2px; }
+  .mobile-menu { display: none; }
+
+  .page-wrap { padding-top: 84px; }
+
+  /* HERO */
+  .hero {
+    background: var(--navy);
+    padding: 80px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(37,99,235,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 720px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.8); font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 20px; margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 54px);
+    font-weight: 800; color: var(--white);
+    letter-spacing: -0.5px; line-height: 1.1; margin-bottom: 20px;
+  }
+
+  .hero h1 em { font-style: normal; color: #60a5fa; }
+
+  .hero p {
+    font-size: 18px; color: rgba(255,255,255,0.7);
+    line-height: 1.8; max-width: 580px;
+  }
+
+  /* STORY SECTION */
+  .story-wrap {
+    max-width: 1100px; margin: 0 auto; padding: 90px 40px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: start;
+  }
+
+  .story-label { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+
+  .story-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 3.5vw, 38px); font-weight: 800;
+    color: var(--navy); line-height: 1.15; letter-spacing: -0.5px;
+    margin-bottom: 24px;
+  }
+
+  .story-body { display: flex; flex-direction: column; gap: 18px; }
+
+  .story-body p {
+    font-size: 16px; color: var(--text); line-height: 1.8;
+  }
+
+  .story-body p strong { color: var(--navy); font-weight: 600; }
+
+  .pullquote {
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px;
+    margin: 8px 0;
+    background: var(--sky);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .pullquote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px !important;
+    font-weight: 700;
+    color: var(--navy) !important;
+    line-height: 1.5 !important;
+    font-style: italic;
+  }
+
+  /* CREDENTIALS CARD */
+  .credentials-card {
+    background: var(--navy);
+    border-radius: 16px;
+    padding: 36px;
+    color: var(--white);
+    position: sticky;
+    top: 104px;
+  }
+
+  .credentials-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 800;
+    margin-bottom: 6px;
+  }
+
+  .credentials-sub {
+    font-size: 13px; color: rgba(255,255,255,0.5);
+    margin-bottom: 28px; line-height: 1.5;
+  }
+
+  .credential-item {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .credential-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .credential-icon {
+    width: 40px; height: 40px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+
+  .credential-text strong {
+    display: block; font-size: 14px; font-weight: 600;
+    color: var(--white); margin-bottom: 3px;
+  }
+
+  .credential-text span {
+    font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5;
+  }
+
+  .license-badge {
+    margin-top: 24px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.8;
+  }
+
+  .license-badge strong { color: rgba(255,255,255,0.8); font-size: 12px; }
+
+  /* DIVIDER */
+  .divider { height: 1px; background: var(--border); max-width: 1100px; margin: 0 auto; }
+
+  /* VALUES */
+  .values-wrap { max-width: 1100px; margin: 0 auto; padding: 80px 40px; }
+
+  .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+
+  .value-card {
+    padding: 28px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--off-white);
+    transition: all 0.25s;
+  }
+
+  .value-card:hover { border-color: var(--accent); box-shadow: 0 6px 24px rgba(37,99,235,0.07); transform: translateY(-2px); }
+
+  .value-icon { font-size: 28px; margin-bottom: 16px; }
+  .value-title { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+  .value-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  /* HOW IT WORKS */
+  .process-wrap { background: var(--off-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px 40px; }
+  .process-inner { max-width: 1100px; margin: 0 auto; }
+
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 48px; position: relative; }
+
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 24px; left: 10%; right: 10%;
+    height: 1px;
+    background: var(--border);
+    z-index: 0;
+  }
+
+  .process-step { text-align: center; position: relative; z-index: 1; }
+
+  .step-circle {
+    width: 48px; height: 48px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 800;
+    color: var(--white);
+    margin: 0 auto 16px;
+    border: 4px solid var(--off-white);
+  }
+
+  .process-step h4 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+  .process-step p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* CTA */
+  .cta-section { background: var(--navy); padding: 80px 40px; text-align: center; }
+  .cta-inner { max-width: 560px; margin: 0 auto; }
+  .cta-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(26px, 3.5vw, 40px); font-weight: 800; color: var(--white); margin-bottom: 14px; letter-spacing: -0.5px; }
+  .cta-section p { font-size: 16px; color: rgba(255,255,255,0.6); margin-bottom: 32px; line-height: 1.7; }
+  .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn-white { display: inline-flex; align-items: center; gap: 8px; background: var(--white); color: var(--navy); padding: 14px 28px; border-radius: 8px; font-size: 15px; font-weight: 700; text-decoration: none; transition: all 0.2s; }
+  .btn-white:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+  .btn-outline { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--white); padding: 14px 24px; border-radius: 8px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1.5px solid rgba(255,255,255,0.25); transition: all 0.2s; }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.6); }
+
+  footer { background: var(--off-white); border-top: 1px solid var(--border); padding: 48px 40px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+  .footer-logo img { height: 32px; width: auto; }
+  .footer-links { display: flex; gap: 28px; list-style: none; flex-wrap: wrap; }
+  .footer-links a { text-decoration: none; color: var(--muted); font-size: 13px; font-weight: 500; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--navy); }
+  .footer-copy { font-size: 12px; color: var(--muted); width: 100%; text-align: center; padding-top: 24px; border-top: 1px solid var(--border); margin-top: 24px; }
+
+  @media (max-width: 900px) {
+    .story-wrap { grid-template-columns: 1fr; gap: 48px; padding: 60px 24px; }
+    .credentials-card { position: static; }
+    .values-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: repeat(2, 1fr); }
+    .process-steps::before { display: none; }
+    .values-wrap, .process-wrap { padding: 60px 24px; }
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: block; }
+    .mobile-menu.open { display: flex; flex-direction: column; position: fixed; top: 84px; left: 0; right: 0; background: white; border-bottom: 1px solid var(--border); padding: 20px 24px; gap: 20px; z-index: 99; }
+    .mobile-menu.open a { text-decoration: none; color: var(--navy); font-size: 16px; font-weight: 500; padding: 8px 0; border-bottom: 1px solid var(--border); }
+    .mobile-menu.open .nav-cta { background: var(--accent); color: white !important; padding: 14px 20px; border-radius: 8px; text-align: center; border: none; }
+    .hero { padding: 60px 24px; }
+    .cta-section { padding: 60px 24px; }
+    footer { padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="featherway-logo.png" alt="Featherway Windows"></a>
+  <ul class="nav-links">
+    <li><a href="about.html" style="color:var(--navy)">About Us</a></li>
+    <li><a href="pella.html">Pella Windows</a></li>
+    <li><a href="warranty.html">Warranty</a></li>
+    <li><a href="quick-quote.html">Quick Quote</a></li>
+    <li><a href="build-a-quote.html" class="nav-cta">Build A Quote</a></li>
+  </ul>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="about.html">About Us</a>
+  <a href="pella.html">Pella Windows</a>
+  <a href="warranty.html">Warranty</a>
+  <a href="quick-quote.html">Quick Quote</a>
+  <a href="build-a-quote.html" class="nav-cta">Build A Quote</a>
+</div>
+
+<div class="page-wrap">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Metro Detroit · Licensed &amp; Insured</div>
+      <h1>Built for the homeowner who deserves <em>a straight answer.</em></h1>
+      <p>Featherway exists because window replacement doesn't have to mean high-pressure visits, vague pricing, and a salesperson who won't stop calling. There's a better way to do this.</p>
+    </div>
+  </section>
+
+  <!-- STORY + CREDENTIALS -->
+  <div class="story-wrap">
+    <div>
+      <div class="story-label">Our Story</div>
+      <h2 class="story-title">I came from the other side of the table.</h2>
+      <div class="story-body">
+        <p>Before starting Featherway, I spent years working inside the traditional window industry — the in-home sales visits, the pressure tactics, the four-hour appointments designed to wear you down until you signed.</p>
+
+        <p>I knew the process inside and out. And I never felt good about it.</p>
+
+        <div class="pullquote">
+          <p>"Homeowners deserve to know what they're paying before a salesperson shows up at their door."</p>
+        </div>
+
+        <p>The reality is that <strong>most homeowners already know what they want</strong> — they just want a straight answer on what it costs. The traditional model makes that nearly impossible by design. Pricing only comes at the end of a long sales process, after you've already invested hours of your time.</p>
+
+        <p>Featherway was built around a simple idea: give people real pricing online, without the visit, without the pressure, and without the follow-up calls. If the price works for you, great — we'll take it from there with Pella-certified installation and a clean, professional process from start to finish.</p>
+
+        <p>Think of us as <strong>the knowledgeable friend in the industry</strong> — someone who'll give you honest information, a fair price, and respect your time.</p>
+      </div>
+    </div>
+
+    <!-- CREDENTIALS CARD -->
+    <div class="credentials-card">
+      <div class="credentials-title">Our Credentials</div>
+      <div class="credentials-sub">What we bring to every project.</div>
+
+      <div class="credential-item">
+        <div class="credential-icon">🏛️</div>
+        <div class="credential-text">
+          <strong>Michigan Licensed Builder</strong>
+          <span>Licensed by the Michigan Dept. of Licensing and Regulatory Affairs, Bureau of Construction Codes.</span>
+        </div>
+      </div>
+
+      <div class="credential-item">
+        <div class="credential-icon">🛡️</div>
+        <div class="credential-text">
+          <strong>Fully Insured</strong>
+          <span>General liability insurance on every project. Your home is protected.</span>
+        </div>
+      </div>
+
+      <div class="credential-item">
+        <div class="credential-icon">🪟</div>
+        <div class="credential-text">
+          <strong>Pella Certified Installer</strong>
+          <span>Installation performed by Pella-certified professionals trained to Pella's exact standards.</span>
+        </div>
+      </div>
+
+      <div class="credential-item">
+        <div class="credential-icon">📍</div>
+        <div class="credential-text">
+          <strong>Serving Metro Detroit</strong>
+          <span>Local to Southeast Michigan. We know the market, the weather, and the homes here.</span>
+        </div>
+      </div>
+
+      <div class="license-badge">
+        <strong>Michigan Builder License No. 262500638</strong><br>
+        Issued by LARA · Bureau of Construction Codes<br>
+        Valid through 05/31/2028
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- VALUES -->
+  <div class="values-wrap">
+    <div class="story-label">How We Operate</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(24px,3vw,38px);font-weight:800;color:var(--navy);letter-spacing:-0.5px;margin-bottom:12px">What we believe about doing this right</h2>
+    <p style="font-size:15px;color:var(--muted);line-height:1.7;max-width:560px">These aren't mission statement words. They're the actual reasons Featherway exists.</p>
+
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">💡</div>
+        <div class="value-title">Pricing shouldn't be a secret</div>
+        <div class="value-desc">You should know what a window project costs before you commit to anything — not after a two-hour sales visit. We give you real numbers upfront.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🤝</div>
+        <div class="value-title">Your time matters</div>
+        <div class="value-desc">We built an online process specifically so you don't have to block off your afternoon for a sales appointment. Get pricing on your schedule.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🚫</div>
+        <div class="value-title">No pressure. Ever.</div>
+        <div class="value-desc">We send you a price. You decide if it works. No urgency tactics, no "today only" pricing, no follow-up calls unless you want them.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">✅</div>
+        <div class="value-title">Quality that's verifiable</div>
+        <div class="value-desc">We install authentic Pella windows using Pella-certified installers. Not a look-alike product, not a cut-rate crew. The real thing, done right.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🧹</div>
+        <div class="value-title">We leave it clean</div>
+        <div class="value-desc">Installation day should be the last day you think about your windows for a long time. Our crew treats your home with care and leaves it the way they found it.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">📞</div>
+        <div class="value-title">Straight answers when you need them</div>
+        <div class="value-desc">Have a question before, during, or after your project? You'll get a straight answer from someone who knows the product — not a call center script.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCESS -->
+  <div class="process-wrap">
+    <div class="process-inner">
+      <div class="story-label">The Process</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(24px,3vw,36px);font-weight:800;color:var(--navy);letter-spacing:-0.5px;margin-bottom:10px">What working with Featherway looks like</h2>
+      <p style="font-size:15px;color:var(--muted);line-height:1.7;max-width:520px">Simple, transparent, and on your timeline.</p>
+
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-circle">1</div>
+          <h4>Get your price online</h4>
+          <p>Quick Quote for a fast range, or Build A Quote for an accurate number based on your exact windows.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-circle">2</div>
+          <h4>We review &amp; respond</h4>
+          <p>We review your Build A Quote submission and send your detailed price within 24 hours.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-circle">3</div>
+          <h4>Finalize your order</h4>
+          <p>If the price works, a Pella-certified installer confirms your window details and places the order.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-circle">4</div>
+          <h4>Professional installation</h4>
+          <p>Your windows are installed by certified professionals. Clean, professional, done right.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <h2>Ready to see what your project costs?</h2>
+      <p>No sales visit. No pressure. Just clear pricing based on your actual windows — online, on your timeline.</p>
+      <div class="cta-buttons">
+        <a href="build-a-quote.html" class="btn-white">Build A Quote →</a>
+        <a href="quick-quote.html" class="btn-outline">Quick Quote</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo"><img src="featherway-logo.png" alt="Featherway Windows"></a>
+    <ul class="footer-links">
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="pella.html">Pella Windows</a></li>
+      <li><a href="warranty.html">Warranty</a></li>
+      <li><a href="quick-quote.html">Quick Quote</a></li>
+      <li><a href="build-a-quote.html">Build A Quote</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 Featherway Windows. Metro Detroit's Simplest Window Quotes. Michigan Licensed Builder — License No. 262500638. Licensed &amp; Insured. Pella® is a registered trademark of Pella Corporation. Featherway is an independent installer and is not affiliated with or endorsed by Pella Corporation.</p>
+  </div>
+</footer>
+
+<script>
+function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+document.addEventListener('click', e => {
+  if (!e.target.closest('nav') && !e.target.closest('#mobileMenu'))
+    document.getElementById('mobileMenu').classList.remove('open');
+});
+</script>
+</body>
+</html>
