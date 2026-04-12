@@ -685,6 +685,7 @@ function renderWindowBody(w) {
 
   // Window type picker
   html += `<span class="sub-label">Window Style</span>
+  <div style="margin-bottom:10px;font-size:12px;color:var(--muted)">Not sure? <a href="pella.html" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none">Learn about our window options →</a></div>
   <div class="style-picker" style="margin-bottom:20px">
     ${WINDOW_TYPES[w.series].map(type => `
       <div class="style-option ${w.type === type ? 'selected' : ''}" onclick="updateField(${w.id},'type','${type}')">
