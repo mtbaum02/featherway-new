@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Featherway Windows — Metro Detroit's simplest way to price and replace windows. Get clear, accurate estimates 100% online. No sales visits. No pressure.">
+<title>Featherway Windows — Metro Detroit's Simplest Window Quotes</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f2137;
+    --navy-mid: #1a3a5c;
+    --accent: #2563eb;
+    --accent-light: #3b82f6;
+    --sky: #e8f4fd;
+    --text: #1a2b3c;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --white: #ffffff;
+    --off-white: #f8fafc;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--navy);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--navy); }
+
+  .nav-cta {
+    background: var(--accent);
+    color: var(--white) !important;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-weight: 600 !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--accent-light) !important; color: var(--white) !important; }
+
+  .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); margin: 5px 0; border-radius: 2px; transition: all 0.3s; }
+
+  .mobile-menu { display: none; }
+
+  /* HERO */
+  .hero {
+    padding-top: 68px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(37,99,235,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--sky);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 5vw, 58px);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--navy);
+    margin-bottom: 24px;
+    letter-spacing: -1px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+    position: relative;
+  }
+
+  .hero h1 em::after {
+    content: '';
+    position: absolute;
+    bottom: 2px; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+    opacity: 0.25;
+    border-radius: 2px;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 40px;
+    font-weight: 400;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: var(--white);
+    padding: 16px 32px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(37,99,235,0.3);
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-light);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 28px rgba(37,99,235,0.35);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--navy);
+    padding: 16px 28px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1.5px solid var(--border);
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  .hero-trust {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 36px;
+    padding-top: 36px;
+    border-top: 1px solid var(--border);
+    animation: fadeUp 0.6s 0.4s ease both;
+    flex-wrap: wrap;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .trust-item .check {
+    width: 18px; height: 18px;
+    background: var(--sky);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-size: 10px;
+    flex-shrink: 0;
+  }
+
+  /* HERO VISUAL */
+  .hero-visual {
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .window-card {
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(15,33,55,0.12), 0 4px 16px rgba(15,33,55,0.06);
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .window-card-header {
+    background: var(--navy);
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .window-card-header span {
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .window-card-header strong {
+    color: var(--white);
+    font-size: 15px;
+  }
+
+  .window-card-body { padding: 28px; }
+
+  .quote-step {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+
+  .quote-step:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .step-num {
+    width: 28px; height: 28px;
+    background: var(--sky);
+    color: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .step-num.done {
+    background: var(--accent);
+    color: var(--white);
+  }
+
+  .step-text strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 2px;
+  }
+
+  .step-text span {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .price-reveal {
+    margin-top: 24px;
+    background: var(--sky);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .price-reveal span { font-size: 13px; color: var(--muted); font-weight: 500; }
+
+  .price-reveal strong {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--navy);
+  }
+
+  /* HOW IT WORKS */
+  .section {
+    padding: 100px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    font-size: 17px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 520px;
+  }
+
+  .section-header { margin-bottom: 60px; }
+
+  /* STEPS */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .step-card {
+    position: relative;
+    padding: 32px;
+    background: var(--off-white);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+
+  .step-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 8px 32px rgba(37,99,235,0.08);
+    transform: translateY(-2px);
+  }
+
+  .step-icon {
+    width: 48px; height: 48px;
+    background: var(--sky);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .step-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .step-card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .step-number {
+    position: absolute;
+    top: 20px; right: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--navy);
+    opacity: 0.04;
+    line-height: 1;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* WHY FEATHERWAY */
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .why-list { list-style: none; display: flex; flex-direction: column; gap: 24px; }
+
+  .why-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .why-icon {
+    width: 40px; height: 40px;
+    background: var(--sky);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .why-item h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .why-item p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .why-visual {
+    background: var(--navy);
+    border-radius: 16px;
+    padding: 48px 40px;
+    color: var(--white);
+  }
+
+  .why-visual h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .why-visual p {
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  .stat-row {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .stat { flex: 1; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--white);
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 500;
+  }
+
+  .pella-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    font-weight: 500;
+  }
+
+  .pella-badge::before {
+    content: '✓';
+    width: 20px; height: 20px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  /* CTA SECTION */
+  .cta-section {
+    background: var(--navy);
+    padding: 100px 40px;
+    text-align: center;
+  }
+
+  .cta-inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 4vw, 46px);
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+  }
+
+  .cta-section p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 40px;
+    line-height: 1.7;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-white {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--white);
+    color: var(--navy);
+    padding: 16px 32px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-white:hover { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
+
+  .btn-outline-white {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--white);
+    padding: 16px 28px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    transition: all 0.2s;
+  }
+
+  .btn-outline-white:hover { border-color: rgba(255,255,255,0.6); transform: translateY(-1px); }
+
+  /* FOOTER */
+  footer {
+    background: var(--off-white);
+    border-top: 1px solid var(--border);
+    padding: 48px 40px;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--navy);
+    text-decoration: none;
+  }
+
+  .footer-logo span { color: var(--accent); }
+
+  .footer-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--navy); }
+
+  .footer-copy {
+    font-size: 12px;
+    color: var(--muted);
+    width: 100%;
+    text-align: center;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 24px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 48px; padding: 60px 24px; }
+    .hero-visual { order: -1; }
+    .steps-grid { grid-template-columns: 1fr; gap: 16px; }
+    .why-grid { grid-template-columns: 1fr; gap: 48px; }
+    .section { padding: 64px 24px; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: block; }
+    .mobile-menu.open {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 20px 24px;
+      gap: 20px;
+      z-index: 99;
+    }
+    .mobile-menu.open a {
+      text-decoration: none;
+      color: var(--navy);
+      font-size: 16px;
+      font-weight: 500;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu.open .nav-cta {
+      background: var(--accent);
+      color: white !important;
+      padding: 14px 20px;
+      border-radius: 8px;
+      text-align: center;
+      border: none;
+    }
+    .cta-section { padding: 64px 24px; }
+    footer { padding: 40px 24px; }
+    .footer-inner { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo"><img src="featherway-logo.png" alt="Featherway Windows" style="height:38px;width:auto"></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="pella.html">Pella Windows</a></li>
+    <li><a href="quick-quote.html">Quick Quote</a></li>
+    <li><a href="build-a-quote.html" class="nav-cta">Build A Quote</a></li>
+  </ul>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="about.html">About Us</a>
+  <a href="pella.html">Pella Windows</a>
+  <a href="quick-quote.html">Quick Quote</a>
+  <a href="build-a-quote.html" class="nav-cta">Build A Quote</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Metro Detroit's Window Experts</div>
+      <h1>Replace Your Windows <em>Without</em> the Runaround</h1>
+      <p class="hero-sub">Clear pricing. No sales visits. No pressure. Get an accurate estimate for your window project entirely online — in minutes.</p>
+      <div class="hero-actions">
+        <a href="quick-quote.html" class="btn-primary">
+          Get a Quick Quote
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        </a>
+        <a href="build-a-quote.html" class="btn-secondary">Build A Quote</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item"><div class="check">✓</div>Pella Certified Installer</div>
+        <div class="trust-item"><div class="check">✓</div>100% Online Pricing</div>
+        <div class="trust-item"><div class="check">✓</div>No Sales Pressure</div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="window-card">
+        <div class="window-card-header">
+          <strong>Your Quote</strong>
+          <span>Featherway Windows</span>
+        </div>
+        <div class="window-card-body">
+          <div class="quote-step">
+            <div class="step-num done">✓</div>
+            <div class="step-text">
+              <strong>Tell us about your project</strong>
+              <span>Number of windows, approximate sizes</span>
+            </div>
+          </div>
+          <div class="quote-step">
+            <div class="step-num done">✓</div>
+            <div class="step-text">
+              <strong>Choose your product line</strong>
+              <span>250 Series · Lifestyle Series · Impervia</span>
+            </div>
+          </div>
+          <div class="quote-step">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              <strong>Receive your estimate</strong>
+              <span>Via email within 24 hours</span>
+            </div>
+          </div>
+          <div class="price-reveal">
+            <span>Estimated range</span>
+            <strong>$4,200 – $6,800</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-label">Simple Process</div>
+    <h2 class="section-title">Pricing windows shouldn't be complicated</h2>
+    <p class="section-sub">We cut out the back-and-forth. No waiting for a salesperson to visit. No surprise quotes after a long pitch.</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-number">1</div>
+      <div class="step-icon">📋</div>
+      <h3>Enter your project details</h3>
+      <p>Tell us how many windows, rough sizes, and what style you're looking for. Takes about 3 minutes.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-number">2</div>
+      <div class="step-icon">💬</div>
+      <h3>Receive clear pricing</h3>
+      <p>We review your submission and send back a real price range within 24 hours. No vague estimates.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-number">3</div>
+      <div class="step-icon">🪟</div>
+      <h3>Schedule your install</h3>
+      <p>If the pricing works for you, a Pella-certified installer handles everything from order to completion.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- WHY FEATHERWAY -->
+<div class="section">
+  <div class="why-grid">
+    <div>
+      <div class="section-label">Why Featherway</div>
+      <h2 class="section-title">A better way to buy windows</h2>
+      <p class="section-sub" style="margin-bottom:40px">The traditional window buying experience is broken. We built something better.</p>
+      <ul class="why-list">
+        <li class="why-item">
+          <div class="why-icon">🚫</div>
+          <div>
+            <h4>No in-home sales visits</h4>
+            <p>Get accurate pricing without scheduling a salesperson to come to your home and pitch you for two hours.</p>
+          </div>
+        </li>
+        <li class="why-item">
+          <div class="why-icon">💡</div>
+          <div>
+            <h4>Transparent pricing from the start</h4>
+            <p>Real numbers, early. No waiting until the end of a sales process to find out what you're actually paying.</p>
+          </div>
+        </li>
+        <li class="why-item">
+          <div class="why-icon">🛡️</div>
+          <div>
+            <h4>Pella quality, more efficient pricing</h4>
+            <p>Same authentic Pella windows, same certified installation — without the overhead of showrooms and commission-driven sales teams.</p>
+          </div>
+        </li>
+        <li class="why-item">
+          <div class="why-icon">📞</div>
+          <div>
+            <h4>No endless follow-up calls</h4>
+            <p>We send you a price. You decide if it works. No aggressive follow-up, no manufactured urgency.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="why-visual">
+      <h3>Pella® Certified Installer</h3>
+      <p>Same windows. Same installation standards. A more efficient way to buy.</p>
+      <div class="stat-row">
+        <div class="stat">
+          <span class="stat-num">3</span>
+          <span class="stat-label">Product Lines</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">24hr</span>
+          <span class="stat-label">Quote Turnaround</span>
+        </div>
+      </div>
+      <div class="pella-badge">Authentic Pella® Windows — No Substitutes</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2>Ready to get real pricing on your project?</h2>
+    <p>No sales visit required. Get a clear estimate online in minutes — or take your time and build a detailed quote at your own pace.</p>
+    <div class="cta-buttons">
+      <a href="quick-quote.html" class="btn-white">
+        Get a Quick Quote
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+      </a>
+      <a href="build-a-quote.html" class="btn-outline-white">Build A Quote</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo"><img src="featherway-logo.png" alt="Featherway Windows" style="height:32px;width:auto"></a>
+    <ul class="footer-links">
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="pella.html">Pella Windows</a></li>
+      <li><a href="quick-quote.html">Quick Quote</a></li>
+      <li><a href="build-a-quote.html">Build A Quote</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 Featherway Windows. Metro Detroit's Simplest Window Quotes. Pella® is a registered trademark of Pella Corporation. Featherway is an independent installer and is not affiliated with or endorsed by Pella Corporation.</p>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){
+  const m=document.getElementById('mobileMenu');
+  m.classList.toggle('open');
+}
+// Close menu on outside click
+document.addEventListener('click',e=>{
+  const menu=document.getElementById('mobileMenu');
+  if(!e.target.closest('nav')&&!e.target.closest('#mobileMenu')) menu.classList.remove('open');
+});
+</script>
+</body>
+</html>
