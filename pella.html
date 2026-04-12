@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Featherway installs authentic Pella windows — 250 Series, Lifestyle Series, and Impervia — with Pella-certified installers serving Metro Detroit.">
+<title>Pella Windows — Featherway Windows</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f2137; --navy-mid: #1a3a5c; --accent: #2563eb; --accent-light: #3b82f6;
+    --sky: #e8f4fd; --text: #1a2b3c; --muted: #64748b; --border: #e2e8f0;
+    --white: #ffffff; --off-white: #f8fafc;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); -webkit-font-smoothing: antialiased; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 40px; height: 84px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo img { height: 65px; width: auto; }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-cta { background: var(--accent); color: var(--white) !important; padding: 10px 22px; border-radius: 6px; font-weight: 600 !important; }
+  .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); margin: 5px 0; border-radius: 2px; }
+  .mobile-menu { display: none; }
+
+  .page-wrap { padding-top: 84px; }
+
+  /* HERO */
+  .hero {
+    background: var(--navy);
+    padding: 80px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 60% 50%, rgba(37,99,235,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner { position: relative; z-index: 1; max-width: 680px; }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.8); font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 20px; margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 800; color: var(--white);
+    letter-spacing: -0.5px; line-height: 1.1; margin-bottom: 20px;
+  }
+
+  .hero h1 span { color: #60a5fa; }
+
+  .hero p {
+    font-size: 17px; color: rgba(255,255,255,0.65);
+    line-height: 1.7; margin-bottom: 36px;
+  }
+
+  .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  .btn-white {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--white); color: var(--navy);
+    padding: 14px 28px; border-radius: 8px;
+    font-size: 15px; font-weight: 700; text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-white:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent; color: var(--white);
+    padding: 14px 24px; border-radius: 8px;
+    font-size: 15px; font-weight: 500; text-decoration: none;
+    border: 1.5px solid rgba(255,255,255,0.25); transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.6); }
+
+  /* WHY NOT PELLA DIRECT */
+  .why-strip {
+    background: var(--sky);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 40px;
+    text-align: center;
+  }
+
+  .why-strip p {
+    font-size: 15px; color: var(--navy); max-width: 680px; margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .why-strip strong { color: var(--accent); }
+
+  /* SECTIONS */
+  .section { padding: 90px 40px; max-width: 1160px; margin: 0 auto; }
+  .section-sm { padding: 64px 40px; max-width: 1160px; margin: 0 auto; }
+
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(26px, 3.5vw, 40px); font-weight: 800; color: var(--navy); line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 14px; }
+  .section-sub { font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 540px; }
+
+  .divider { height: 1px; background: var(--border); max-width: 1160px; margin: 0 auto; }
+
+  /* PRODUCT LINES */
+  .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+
+  .product-card {
+    border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+    transition: all 0.3s; background: var(--white);
+  }
+
+  .product-card:hover { box-shadow: 0 12px 40px rgba(15,33,55,0.1); transform: translateY(-3px); }
+
+  .product-card-top {
+    padding: 32px 28px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .product-icon { font-size: 36px; margin-bottom: 16px; }
+
+  .product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 800; color: var(--navy); margin-bottom: 4px;
+  }
+
+  .product-material {
+    font-size: 12px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+  }
+
+  .product-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  .product-card-bottom { padding: 20px 28px; }
+
+  .product-features { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+  .product-feature {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 13px; color: var(--text); line-height: 1.5;
+  }
+
+  .feature-check {
+    width: 18px; height: 18px; background: var(--sky);
+    color: var(--accent); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+  }
+
+  .product-badge {
+    display: inline-block; margin-top: 16px;
+    padding: 4px 12px; border-radius: 20px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+  }
+
+  .badge-popular { background: rgba(37,99,235,0.1); color: var(--accent); }
+  .badge-premium { background: rgba(120,80,40,0.1); color: #8B6534; }
+  .badge-tough { background: rgba(22,163,74,0.1); color: #16a34a; }
+
+  /* WHY FEATHERWAY GRID */
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+
+  .why-list { list-style: none; display: flex; flex-direction: column; gap: 28px; margin-top: 36px; }
+
+  .why-item { display: flex; gap: 16px; }
+
+  .why-icon {
+    width: 44px; height: 44px; background: var(--sky); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+
+  .why-item h4 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .why-item p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* COMPARISON TABLE */
+  .compare-table { width: 100%; border-collapse: collapse; margin-top: 40px; }
+
+  .compare-table th {
+    padding: 14px 20px; text-align: left;
+    font-size: 12px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--muted);
+    border-bottom: 2px solid var(--border);
+    background: var(--off-white);
+  }
+
+  .compare-table th:first-child { width: 35%; }
+
+  .compare-table td {
+    padding: 14px 20px; font-size: 14px;
+    border-bottom: 1px solid var(--border); vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:hover td { background: var(--off-white); }
+
+  .compare-table td:first-child { font-weight: 600; color: var(--navy); }
+
+  .check-yes { color: #16a34a; font-weight: 700; }
+  .check-no { color: #94a3b8; }
+
+  /* CTA */
+  .cta-section { background: var(--navy); padding: 90px 40px; text-align: center; }
+  .cta-inner { max-width: 600px; margin: 0 auto; }
+  .cta-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 44px); font-weight: 800; color: var(--white); margin-bottom: 16px; letter-spacing: -0.5px; }
+  .cta-section p { font-size: 17px; color: rgba(255,255,255,0.6); margin-bottom: 36px; line-height: 1.7; }
+  .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  .disclaimer {
+    max-width: 1160px; margin: 0 auto;
+    padding: 24px 40px; font-size: 11px; color: var(--muted); line-height: 1.6;
+    border-top: 1px solid var(--border);
+  }
+
+  footer { background: var(--off-white); border-top: 1px solid var(--border); padding: 48px 40px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+  .footer-logo img { height: 32px; width: auto; }
+  .footer-links { display: flex; gap: 28px; list-style: none; flex-wrap: wrap; }
+  .footer-links a { text-decoration: none; color: var(--muted); font-size: 13px; font-weight: 500; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--navy); }
+  .footer-copy { font-size: 12px; color: var(--muted); width: 100%; text-align: center; padding-top: 24px; border-top: 1px solid var(--border); margin-top: 24px; }
+
+  @media (max-width: 900px) {
+    .products-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; gap: 40px; }
+    .section, .section-sm { padding: 60px 24px; }
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: block; }
+    .mobile-menu.open { display: flex; flex-direction: column; position: fixed; top: 84px; left: 0; right: 0; background: white; border-bottom: 1px solid var(--border); padding: 20px 24px; gap: 20px; z-index: 99; }
+    .mobile-menu.open a { text-decoration: none; color: var(--navy); font-size: 16px; font-weight: 500; padding: 8px 0; border-bottom: 1px solid var(--border); }
+    .mobile-menu.open .nav-cta { background: var(--accent); color: white !important; padding: 14px 20px; border-radius: 8px; text-align: center; border: none; }
+    .hero { padding: 60px 24px; }
+    .why-strip { padding: 28px 24px; }
+    .cta-section { padding: 64px 24px; }
+    footer { padding: 40px 24px; }
+    .compare-table th, .compare-table td { padding: 12px 14px; font-size: 13px; }
+    .disclaimer { padding: 20px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="featherway-logo.png" alt="Featherway Windows"></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="pella.html" style="color:var(--navy)">Pella Windows</a></li>
+    <li><a href="quick-quote.html">Quick Quote</a></li>
+    <li><a href="build-a-quote.html" class="nav-cta">Build A Quote</a></li>
+  </ul>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="about.html">About Us</a>
+  <a href="pella.html">Pella Windows</a>
+  <a href="quick-quote.html">Quick Quote</a>
+  <a href="build-a-quote.html" class="nav-cta">Build A Quote</a>
+</div>
+
+<div class="page-wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Pella® Certified Installer</div>
+      <h1>Premium Pella Windows.<br><span>Smarter Way to Buy.</span></h1>
+      <p>We install authentic Pella windows using Pella-certified professionals — the same products, the same quality, without the showroom overhead and commission-driven sales model.</p>
+      <div class="hero-actions">
+        <a href="build-a-quote.html" class="btn-white">Build A Quote →</a>
+        <a href="quick-quote.html" class="btn-outline">Quick Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY STRIP -->
+  <div class="why-strip">
+    <p>When you buy directly through Pella's retail model, you're paying for showrooms, commissioned sales reps, and in-home visits. <strong>Our online-first model passes those savings directly to you</strong> — without compromising on product quality or installation standards.</p>
+  </div>
+
+  <!-- PRODUCT LINES -->
+  <div class="section">
+    <div class="section-label">Our Product Lines</div>
+    <h2 class="section-title">Three lines. Every budget. Every home.</h2>
+    <p class="section-sub">We install all three Pella product lines, so you can choose what fits your home and your budget — not just what a salesperson is pushing.</p>
+
+    <div class="products-grid">
+
+      <!-- 250 Series -->
+      <div class="product-card">
+        <div class="product-card-top">
+          <div class="product-icon">⬜</div>
+          <div class="product-name">250 Series</div>
+          <div class="product-material">Vinyl</div>
+          <p class="product-desc">Pella's most popular line. Durable, low-maintenance vinyl that holds up beautifully in Michigan winters. The right choice for most replacement projects.</p>
+          <span class="product-badge badge-popular">Most Popular</span>
+        </div>
+        <div class="product-card-bottom">
+          <ul class="product-features">
+            <li class="product-feature"><div class="feature-check">✓</div>Low maintenance — never needs painting</li>
+            <li class="product-feature"><div class="feature-check">✓</div>Double or triple pane Low-E glass</li>
+            <li class="product-feature"><div class="feature-check">✓</div>Wide range of styles and configurations</li>
+            <li class="product-feature"><div class="feature-check">✓</div>Strong energy efficiency ratings</li>
+            <li class="product-feature"><div class="feature-check">✓</div>Best value in the Pella lineup</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Lifestyle Series -->
+      <div class="product-card">
+        <div class="product-card-top">
+          <div class="product-icon">🪵</div>
+          <div class="product-name">Lifestyle Series</div>
+          <div class="product-material">Wood Interior / Aluminum Clad Exterior</div>
+          <p class="product-desc">The best of both worlds — warm wood interior for character and comfort, tough aluminum exterior that handles Michigan weather without maintenance.</p>
+          <span class="product-badge badge-premium">Premium</span>
+        </div>
+        <div class="product-card-bottom">
+          <ul class="product-features">
+            <li class="product-feature"><div class="feature-check">✓</div>Real wood interior — stainable and paintable</li>
+            <li class="product-feature"><div class="feature-check">✓</div>Aluminum exterior — zero exterior maintenance</li>
+            <li class="product-feature"><div class="feature-check">✓</div>Double or triple pane Low-E glass</li>
+            <li class="product-feature"><div class="feature-check">✓</div>Ideal for older or historic homes</li>
+            <li class="product-feature"><div class="feature-check">✓</div>Exceptional visual appeal</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Impervia -->
+      <div class="product-card">
+        <div class="product-card-top">
+          <div class="product-icon">🔷</div>
+          <div class="product-name">Impervia</div>
+          <div class="product-material">Fiberglass (Duracast®)</div>
+          <p class="product-desc">Pella's toughest window. Fiberglass is dimensionally stable, meaning it won't warp, swell, or shrink with temperature changes — a real advantage in Michigan.</p>
+          <span class="product-badge badge-tough">Most Durable</span>
+        </div>
+        <div class="product-card-bottom">
+          <ul class="product-features">
+            <li class="product-feature"><div class="feature-check">✓</div>Fiberglass — won't warp, rot, or corrode</li>
+            <li class="product-feature"><div class="feature-check">✓</div>Holds its shape through extreme temperatures</li>
+            <li class="product-feature"><div class="feature-check">✓</div>Double or triple pane Low-E glass</li>
+            <li class="product-feature"><div class="feature-check">✓</div>Excellent long-term durability</li>
+            <li class="product-feature"><div class="feature-check">✓</div>Great for problem areas and harsh exposures</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- COMPARISON TABLE -->
+  <div class="section">
+    <div class="section-label">Side by Side</div>
+    <h2 class="section-title">Which series is right for your home?</h2>
+    <p class="section-sub">Here's a straightforward comparison to help you decide. Not sure? Build A Quote and let us recommend the right fit.</p>
+
+    <div style="overflow-x:auto;margin-top:40px;border:1px solid var(--border);border-radius:12px">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>250 Series</th>
+            <th>Lifestyle Series</th>
+            <th>Impervia</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Material</td>
+            <td>Vinyl</td>
+            <td>Wood / Aluminum Clad</td>
+            <td>Fiberglass</td>
+          </tr>
+          <tr>
+            <td>Interior Finish</td>
+            <td>Vinyl (paintable)</td>
+            <td>Real wood (stain or paint)</td>
+            <td>Fiberglass (paintable)</td>
+          </tr>
+          <tr>
+            <td>Exterior Maintenance</td>
+            <td><span class="check-yes">None required</span></td>
+            <td><span class="check-yes">None required</span></td>
+            <td><span class="check-yes">None required</span></td>
+          </tr>
+          <tr>
+            <td>Temperature Stability</td>
+            <td>Good</td>
+            <td>Good</td>
+            <td><span class="check-yes">Excellent</span></td>
+          </tr>
+          <tr>
+            <td>Double Pane Low-E</td>
+            <td><span class="check-yes">✓</span></td>
+            <td><span class="check-yes">✓</span></td>
+            <td><span class="check-yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Triple Pane Low-E</td>
+            <td><span class="check-yes">✓</span></td>
+            <td><span class="check-yes">✓</span></td>
+            <td><span class="check-yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Slider Window</td>
+            <td><span class="check-yes">✓</span></td>
+            <td><span class="check-no">—</span></td>
+            <td><span class="check-yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Best For</td>
+            <td>Most homes, best value</td>
+            <td>Character homes, wood lovers</td>
+            <td>Harsh exposures, max durability</td>
+          </tr>
+          <tr>
+            <td>Price Range</td>
+            <td>$ Most affordable</td>
+            <td>$$$ Premium</td>
+            <td>$$ Mid-range</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- WHY FEATHERWAY -->
+  <div class="section">
+    <div class="why-grid">
+      <div>
+        <div class="section-label">Why Buy Through Featherway</div>
+        <h2 class="section-title">Same Pella. Better experience.</h2>
+        <ul class="why-list">
+          <li class="why-item">
+            <div class="why-icon">✅</div>
+            <div>
+              <h4>Authentic Pella® products — no substitutes</h4>
+              <p>Every window we install is a genuine Pella product. Not a look-alike, not a rebranded alternative.</p>
+            </div>
+          </li>
+          <li class="why-item">
+            <div class="why-icon">🔧</div>
+            <div>
+              <h4>Pella-certified installation</h4>
+              <p>Our installers are trained and certified within the Pella network — the same standard as buying direct.</p>
+            </div>
+          </li>
+          <li class="why-item">
+            <div class="why-icon">🛡️</div>
+            <div>
+              <h4>Full manufacturer warranty</h4>
+              <p>Your windows carry Pella's warranty regardless of where you bought them. No gaps, no exceptions.</p>
+            </div>
+          </li>
+          <li class="why-item">
+            <div class="why-icon">💻</div>
+            <div>
+              <h4>Online pricing — no showroom required</h4>
+              <p>Get real numbers online without scheduling a sales visit. We don't have showroom overhead to pass on to you.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div style="background:var(--off-white);border:1px solid var(--border);border-radius:16px;padding:40px">
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:var(--navy);margin-bottom:8px">You're not paying less for less.</div>
+        <div style="font-size:15px;color:var(--muted);margin-bottom:32px;line-height:1.7">You're paying less for efficiency. The windows are identical. The installation standard is identical. The warranty is identical. The difference is our model — no commissioned reps, no showrooms, no pressure.</div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--white);border-radius:10px;border:1px solid var(--border)">
+            <div style="font-size:24px">🏠</div>
+            <div><div style="font-size:14px;font-weight:700;color:var(--navy)">No in-home sales visit</div><div style="font-size:12px;color:var(--muted)">Get pricing on your schedule, not theirs</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--white);border-radius:10px;border:1px solid var(--border)">
+            <div style="font-size:24px">📋</div>
+            <div><div style="font-size:14px;font-weight:700;color:var(--navy)">Transparent pricing</div><div style="font-size:12px;color:var(--muted)">Real numbers before you commit to anything</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--white);border-radius:10px;border:1px solid var(--border)">
+            <div style="font-size:24px">📞</div>
+            <div><div style="font-size:14px;font-weight:700;color:var(--navy)">No follow-up pressure</div><div style="font-size:12px;color:var(--muted)">We send your quote — you decide, on your timeline</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <h2>Ready to see what Pella windows would cost for your home?</h2>
+      <p>Build a detailed quote with your exact windows and options. We'll review it and send your price within 24 hours.</p>
+      <div class="cta-buttons">
+        <a href="build-a-quote.html" class="btn-white">Build A Quote →</a>
+        <a href="quick-quote.html" class="btn-outline">Quick Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="disclaimer">
+    Pella® is a registered trademark of Pella Corporation. Featherway Windows is an independent window installation company and is not affiliated with, endorsed by, or sponsored by Pella Corporation. All Pella product names and trademarks are the property of Pella Corporation.
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo"><img src="featherway-logo.png" alt="Featherway Windows"></a>
+    <ul class="footer-links">
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="pella.html">Pella Windows</a></li>
+      <li><a href="quick-quote.html">Quick Quote</a></li>
+      <li><a href="build-a-quote.html">Build A Quote</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 Featherway Windows. Metro Detroit's Simplest Window Quotes.</p>
+  </div>
+</footer>
+
+<script>
+function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+document.addEventListener('click', e => {
+  if (!e.target.closest('nav') && !e.target.closest('#mobileMenu'))
+    document.getElementById('mobileMenu').classList.remove('open');
+});
+</script>
+</body>
+</html>
