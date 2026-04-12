@@ -887,14 +887,23 @@ async function submitQuote() {
       console.log('Quote payload:', payload);
       await new Promise(r => setTimeout(r, 800));
     } else {
-      const res = await fetch(FORMSPREE_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      const resJson = await res.json();
+      console.log('Fetching:', FORMSPREE_URL);
+      let res, resJson;
+      try {
+        res = await fetch(FORMSPREE_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        console.log('Status:', res.status, res.statusText);
+        resJson = await res.json();
+        console.log('Body:', JSON.stringify(resJson));
+      } catch(fetchErr) {
+        console.error('Fetch error:', fetchErr);
+        throw new Error('Network error: ' + fetchErr.message);
+      }
       if (resJson.errors) throw new Error(resJson.errors[0].message);
-      if (!res.ok) throw new Error('Submission failed — status ' + res.status);
+      if (!res.ok) throw new Error('Failed: ' + res.status + ' ' + JSON.stringify(resJson));
     }
 
     localStorage.removeItem('featherway_baq');
