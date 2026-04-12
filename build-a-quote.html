@@ -887,12 +887,17 @@ async function submitQuote() {
       console.log('Quote payload:', payload);
       await new Promise(r => setTimeout(r, 800));
     } else {
+      const formData = new FormData();
+      for (const [key, val] of Object.entries(payload)) {
+        formData.append(key, val);
+      }
       const res = await fetch(FORMSPREE_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(payload)
+        body: formData,
+        headers: { 'Accept': 'application/json' }
       });
-      if (!res.ok) throw new Error('Submission failed');
+      const resJson = await res.json();
+      if (!res.ok || resJson.errors) throw new Error(resJson.errors?.[0]?.message || 'Submission failed');
     }
 
     localStorage.removeItem('featherway_baq');
