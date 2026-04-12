@@ -887,17 +887,28 @@ async function submitQuote() {
       console.log('Quote payload:', payload);
       await new Promise(r => setTimeout(r, 800));
     } else {
-      const formData = new FormData();
+      // Use a hidden form for reliable Formspree submission
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = FORMSPREE_URL;
+      form.style.display = 'none';
+      // Add hidden redirect back to success state
+      const redirectField = document.createElement('input');
+      redirectField.type = 'hidden';
+      redirectField.name = '_next';
+      redirectField.value = window.location.href + '?success=true';
+      form.appendChild(redirectField);
+      // Add all payload fields
       for (const [key, val] of Object.entries(payload)) {
-        formData.append(key, val);
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = val;
+        form.appendChild(input);
       }
-      const res = await fetch(FORMSPREE_URL, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      });
-      const resJson = await res.json();
-      if (!res.ok || resJson.errors) throw new Error(resJson.errors?.[0]?.message || 'Submission failed');
+      document.body.appendChild(form);
+      form.submit();
+      return; // page will redirect
     }
 
     localStorage.removeItem('featherway_baq');
@@ -922,8 +933,17 @@ document.addEventListener('click', e => {
 });
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
-loadSaved();
-if (windows.length === 0) addWindow();
+// Check for success redirect from Formspree
+if (window.location.search.includes('success=true')) {
+  const email = new URLSearchParams(window.location.search).get('email') || '';
+  document.getElementById('confirmEmail').textContent = email || 'your email';
+  document.getElementById('mainWrap').style.display = 'none';
+  document.getElementById('successWrap').style.display = 'block';
+  localStorage.removeItem('featherway_baq');
+} else {
+  loadSaved();
+  if (windows.length === 0) addWindow();
+}
 </script>
 </body>
 </html>
