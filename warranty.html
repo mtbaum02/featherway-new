@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Plain English warranty comparison for Pella 250 Series, Lifestyle Series, and Impervia windows. Understand exactly what's covered before you buy.">
+<title>Warranty Coverage — Featherway Windows</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f2137; --navy-mid: #1a3a5c; --accent: #2563eb; --accent-light: #3b82f6;
+    --sky: #e8f4fd; --text: #1a2b3c; --muted: #64748b; --border: #e2e8f0;
+    --white: #ffffff; --off-white: #f8fafc;
+    --green: #16a34a; --green-light: #dcfce7;
+    --yellow: #d97706; --yellow-light: #fef3c7;
+    --red: #dc2626; --red-light: #fef2f2;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); -webkit-font-smoothing: antialiased; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 40px; height: 84px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo img { height: 65px; width: auto; }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-cta { background: var(--accent); color: var(--white) !important; padding: 10px 22px; border-radius: 6px; font-weight: 600 !important; }
+  .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); margin: 5px 0; border-radius: 2px; }
+  .mobile-menu { display: none; }
+
+  .page-wrap { padding-top: 84px; }
+
+  /* HERO */
+  .hero { background: var(--navy); padding: 72px 40px; text-align: center; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 46px); font-weight: 800; color: var(--white); letter-spacing: -0.5px; margin-bottom: 16px; }
+  .hero p { font-size: 17px; color: rgba(255,255,255,0.65); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+
+  /* HONEST INTRO */
+  .honest-strip {
+    background: var(--sky); border-bottom: 1px solid var(--border);
+    padding: 28px 40px; text-align: center;
+  }
+  .honest-strip p { font-size: 15px; color: var(--navy); max-width: 700px; margin: 0 auto; line-height: 1.7; }
+  .honest-strip strong { color: var(--accent); }
+
+  /* MAIN */
+  .section { padding: 80px 40px; max-width: 1100px; margin: 0 auto; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(24px, 3vw, 38px); font-weight: 800; color: var(--navy); line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 14px; }
+  .section-sub { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 600px; margin-bottom: 48px; }
+  .divider { height: 1px; background: var(--border); max-width: 1100px; margin: 0 auto; }
+
+  /* SUMMARY CARDS */
+  .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 56px; }
+
+  .summary-card {
+    border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+    transition: all 0.25s;
+  }
+  .summary-card:hover { box-shadow: 0 8px 32px rgba(15,33,55,0.09); transform: translateY(-2px); }
+
+  .summary-card-top { padding: 24px; border-bottom: 1px solid var(--border); }
+  .series-icon { font-size: 32px; margin-bottom: 12px; }
+  .series-name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 800; color: var(--navy); margin-bottom: 3px; }
+  .series-material { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .series-headline { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  .summary-card-body { padding: 20px 24px; }
+  .warranty-line { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0; border-bottom: 1px solid rgba(226,232,240,0.6); font-size: 13px; gap: 12px; }
+  .warranty-line:last-child { border-bottom: none; }
+  .warranty-what { color: var(--muted); flex: 1; }
+  .warranty-term { font-weight: 700; color: var(--navy); text-align: right; white-space: nowrap; }
+  .warranty-term.lifetime { color: var(--green); }
+  .warranty-term.twenty { color: var(--accent); }
+  .warranty-term.ten { color: var(--navy); }
+
+  /* PLAIN ENGLISH BREAKDOWN */
+  .breakdown-section { margin-bottom: 48px; }
+  .breakdown-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 800; color: var(--navy);
+    margin-bottom: 6px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .breakdown-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+
+  .coverage-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  .coverage-item {
+    padding: 16px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+
+  .coverage-item.good { background: var(--green-light); border-color: rgba(22,163,74,0.15); }
+  .coverage-item.note { background: var(--yellow-light); border-color: rgba(217,119,6,0.15); }
+  .coverage-item.bad { background: var(--red-light); border-color: rgba(220,38,38,0.1); }
+
+  .coverage-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .coverage-text strong { display: block; font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+  .coverage-text span { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  /* TRANSFER TABLE */
+  .transfer-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; margin-top: 40px; }
+  .transfer-table { width: 100%; border-collapse: collapse; }
+  .transfer-table th { padding: 14px 18px; text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); border-bottom: 2px solid var(--border); background: var(--off-white); }
+  .transfer-table td { padding: 13px 18px; font-size: 13px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+  .transfer-table tr:last-child td { border-bottom: none; }
+  .transfer-table tr:hover td { background: var(--off-white); }
+  .transfer-table td:first-child { font-weight: 600; color: var(--navy); width: 30%; }
+  .tag-yes { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; background: var(--green-light); color: var(--green); }
+  .tag-partial { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; background: var(--yellow-light); color: var(--yellow); }
+  .tag-no { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; background: var(--red-light); color: var(--red); }
+
+  /* WHAT'S NOT COVERED */
+  .not-covered-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 32px; }
+  .not-covered-item { padding: 14px 16px; background: var(--off-white); border: 1px solid var(--border); border-radius: 8px; font-size: 13px; color: var(--muted); line-height: 1.5; display: flex; gap: 10px; align-items: flex-start; }
+  .not-covered-item::before { content: '✕'; color: #cbd5e1; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+
+  /* CTA */
+  .cta-section { background: var(--navy); padding: 80px 40px; text-align: center; }
+  .cta-inner { max-width: 560px; margin: 0 auto; }
+  .cta-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(26px, 3.5vw, 40px); font-weight: 800; color: var(--white); margin-bottom: 14px; letter-spacing: -0.5px; }
+  .cta-section p { font-size: 16px; color: rgba(255,255,255,0.6); margin-bottom: 32px; line-height: 1.7; }
+  .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn-white { display: inline-flex; align-items: center; gap: 8px; background: var(--white); color: var(--navy); padding: 14px 28px; border-radius: 8px; font-size: 15px; font-weight: 700; text-decoration: none; transition: all 0.2s; }
+  .btn-white:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+  .btn-outline { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--white); padding: 14px 24px; border-radius: 8px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1.5px solid rgba(255,255,255,0.25); transition: all 0.2s; }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.6); }
+
+  .disclaimer { max-width: 1100px; margin: 0 auto; padding: 24px 40px; font-size: 11px; color: var(--muted); line-height: 1.6; border-top: 1px solid var(--border); }
+
+  footer { background: var(--off-white); border-top: 1px solid var(--border); padding: 48px 40px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+  .footer-logo img { height: 32px; width: auto; }
+  .footer-links { display: flex; gap: 28px; list-style: none; flex-wrap: wrap; }
+  .footer-links a { text-decoration: none; color: var(--muted); font-size: 13px; font-weight: 500; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--navy); }
+  .footer-copy { font-size: 12px; color: var(--muted); width: 100%; text-align: center; padding-top: 24px; border-top: 1px solid var(--border); margin-top: 24px; }
+
+  @media (max-width: 900px) {
+    .summary-grid, .not-covered-grid { grid-template-columns: 1fr; }
+    .coverage-grid { grid-template-columns: 1fr; }
+    .section { padding: 60px 24px; }
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: block; }
+    .mobile-menu.open { display: flex; flex-direction: column; position: fixed; top: 84px; left: 0; right: 0; background: white; border-bottom: 1px solid var(--border); padding: 20px 24px; gap: 20px; z-index: 99; }
+    .mobile-menu.open a { text-decoration: none; color: var(--navy); font-size: 16px; font-weight: 500; padding: 8px 0; border-bottom: 1px solid var(--border); }
+    .mobile-menu.open .nav-cta { background: var(--accent); color: white !important; padding: 14px 20px; border-radius: 8px; text-align: center; border: none; }
+    .hero { padding: 56px 24px; }
+    .honest-strip { padding: 24px; }
+    .cta-section { padding: 60px 24px; }
+    footer { padding: 40px 24px; }
+    .disclaimer { padding: 20px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="featherway-logo.png" alt="Featherway Windows"></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="pella.html">Pella Windows</a></li>
+    <li><a href="quick-quote.html">Quick Quote</a></li>
+    <li><a href="build-a-quote.html" class="nav-cta">Build A Quote</a></li>
+  </ul>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="about.html">About Us</a>
+  <a href="pella.html">Pella Windows</a>
+  <a href="quick-quote.html">Quick Quote</a>
+  <a href="build-a-quote.html" class="nav-cta">Build A Quote</a>
+</div>
+
+<div class="page-wrap">
+
+  <div class="hero">
+    <h1>Warranty Coverage — Plain English</h1>
+    <p>We pulled the actual warranty documents and translated them into terms that actually make sense. No legal jargon, no fine print surprises.</p>
+  </div>
+
+  <div class="honest-strip">
+    <p>A lot of window companies lead with "lifetime warranty" without explaining what that actually means. <strong>The honest answer: it depends on who owns the home, how long you've owned it, and which part of the window failed.</strong> Here's exactly what's covered on each Pella line we install.</p>
+  </div>
+
+  <!-- SUMMARY CARDS -->
+  <div class="section">
+    <div class="section-label">At a Glance</div>
+    <h2 class="section-title">Warranty summary by product line</h2>
+    <p class="section-sub">These are the headline terms for each series. Scroll down for the full plain-English breakdown of what's actually covered.</p>
+
+    <div class="summary-grid">
+
+      <!-- 250 Series -->
+      <div class="summary-card">
+        <div class="summary-card-top">
+          <div class="series-icon">⬜</div>
+          <div class="series-name">250 Series</div>
+          <div class="series-material">Vinyl</div>
+          <div class="series-headline">Strong lifetime coverage while you own the home. Transfers to a 10-year warranty if you sell.</div>
+        </div>
+        <div class="summary-card-body">
+          <div class="warranty-line"><span class="warranty-what">Frame & components</span><span class="warranty-term lifetime">Lifetime*</span></div>
+          <div class="warranty-line"><span class="warranty-what">Glass seal</span><span class="warranty-term twenty">20 Years</span></div>
+          <div class="warranty-line"><span class="warranty-what">Blinds between glass</span><span class="warranty-term ten">5 Years</span></div>
+          <div class="warranty-line"><span class="warranty-what">Exterior color/laminate</span><span class="warranty-term ten">10 Years</span></div>
+          <div class="warranty-line"><span class="warranty-what">Labor coverage</span><span class="warranty-term ten">2 Years</span></div>
+          <div style="font-size:11px;color:var(--muted);margin-top:10px;line-height:1.5">*Lifetime = as long as original owner occupies the home</div>
+        </div>
+      </div>
+
+      <!-- Lifestyle Series -->
+      <div class="summary-card">
+        <div class="summary-card-top">
+          <div class="series-icon">🪵</div>
+          <div class="series-name">Lifestyle Series</div>
+          <div class="series-material">Wood / Aluminum Clad</div>
+          <div class="series-headline">Lifetime coverage for original owners. More nuanced coverage due to the wood interior — maintenance matters here.</div>
+        </div>
+        <div class="summary-card-body">
+          <div class="warranty-line"><span class="warranty-what">Frame & components</span><span class="warranty-term lifetime">Lifetime*</span></div>
+          <div class="warranty-line"><span class="warranty-what">Glass seal</span><span class="warranty-term lifetime">Lifetime*</span></div>
+          <div class="warranty-line"><span class="warranty-what">Aluminum cladding paint</span><span class="warranty-term ten">10 Years</span></div>
+          <div class="warranty-line"><span class="warranty-what">Hardware defects</span><span class="warranty-term ten">10 Years</span></div>
+          <div class="warranty-line"><span class="warranty-what">Interior finish (paint/stain)</span><span class="warranty-term ten">2 Years</span></div>
+          <div class="warranty-line"><span class="warranty-what">Labor coverage</span><span class="warranty-term ten">2 Years</span></div>
+          <div style="font-size:11px;color:var(--muted);margin-top:10px;line-height:1.5">*Lifetime = as long as original owner occupies the home</div>
+        </div>
+      </div>
+
+      <!-- Impervia -->
+      <div class="summary-card">
+        <div class="summary-card-top">
+          <div class="series-icon">🔷</div>
+          <div class="series-name">Impervia</div>
+          <div class="series-material">Fiberglass (Duracast®)</div>
+          <div class="series-headline">Lifetime warranty on the fiberglass frame itself. 20-year glass seal. Transfers to 10 years if home is sold.</div>
+        </div>
+        <div class="summary-card-body">
+          <div class="warranty-line"><span class="warranty-what">Duracast® frame</span><span class="warranty-term lifetime">Lifetime*</span></div>
+          <div class="warranty-line"><span class="warranty-what">Glass seal</span><span class="warranty-term twenty">20 Years</span></div>
+          <div class="warranty-line"><span class="warranty-what">All other components</span><span class="warranty-term ten">10 Years</span></div>
+          <div class="warranty-line"><span class="warranty-what">Exterior powder coat finish</span><span class="warranty-term ten">10 Years</span></div>
+          <div class="warranty-line"><span class="warranty-what">Labor coverage</span><span class="warranty-term ten">2 Years</span></div>
+          <div style="font-size:11px;color:var(--muted);margin-top:10px;line-height:1.5">*Lifetime = as long as original owner occupies the home</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TRANSFERABILITY TABLE -->
+    <div class="section-label" style="margin-bottom:10px">If You Sell Your Home</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:var(--navy);margin-bottom:8px">What happens to the warranty when you move?</h3>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:0;line-height:1.6">This is the part most companies don't explain clearly. The lifetime warranties are for the original owner only — they automatically convert when the home is sold.</p>
+
+    <div class="transfer-wrap">
+      <table class="transfer-table">
+        <thead>
+          <tr>
+            <th>Series</th>
+            <th>Original Owner Coverage</th>
+            <th>After Home is Sold</th>
+            <th>Transferable?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>250 Series — Frame</td>
+            <td>Lifetime (while you own + occupy)</td>
+            <td>Converts to 10-year from original purchase date</td>
+            <td><span class="tag-partial">Partial</span></td>
+          </tr>
+          <tr>
+            <td>250 Series — Glass Seal</td>
+            <td>20 Years</td>
+            <td>Remaining time transfers to new owner</td>
+            <td><span class="tag-yes">Yes</span></td>
+          </tr>
+          <tr>
+            <td>Lifestyle — Frame & Glass</td>
+            <td>Lifetime (while you own + occupy)</td>
+            <td>Converts to 10-year from original purchase date</td>
+            <td><span class="tag-partial">Partial</span></td>
+          </tr>
+          <tr>
+            <td>Lifestyle — Hardware</td>
+            <td>10 Years</td>
+            <td>Remaining time transfers</td>
+            <td><span class="tag-yes">Yes</span></td>
+          </tr>
+          <tr>
+            <td>Impervia — Duracast® Frame</td>
+            <td>Lifetime (while you own + occupy)</td>
+            <td>Converts to 10-year from original purchase date</td>
+            <td><span class="tag-partial">Partial</span></td>
+          </tr>
+          <tr>
+            <td>Impervia — Glass Seal</td>
+            <td>20 Years</td>
+            <td>Remaining time transfers to new owner</td>
+            <td><span class="tag-yes">Yes</span></td>
+          </tr>
+          <tr>
+            <td>All Series — Labor</td>
+            <td>2 Years</td>
+            <td>Remaining time transfers</td>
+            <td><span class="tag-yes">Yes</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- WHAT IS / ISN'T COVERED -->
+  <div class="section">
+    <div class="section-label">The Details</div>
+    <h2 class="section-title">What's actually covered — and what's not</h2>
+    <p class="section-sub">Read this before buying. Most warranty claims are denied because of things in this list — not because Pella doesn't cover them, but because homeowners didn't know about the conditions.</p>
+
+    <!-- COVERED -->
+    <div class="breakdown-section">
+      <div class="breakdown-title">✅ What is covered</div>
+      <div class="breakdown-sub">These are the defects Pella will repair, replace, or refund for.</div>
+      <div class="coverage-grid">
+        <div class="coverage-item good"><span class="coverage-icon">✓</span><div class="coverage-text"><strong>Frame defects in materials or workmanship</strong><span>Cracking, splitting, warping, or deterioration due to a manufacturing defect — not normal wear.</span></div></div>
+        <div class="coverage-item good"><span class="coverage-icon">✓</span><div class="coverage-text"><strong>Failed glass seal (fogging between panes)</strong><span>If your insulated glass unit fails and causes permanent fogging, that's covered for 20 years on vinyl and fiberglass.</span></div></div>
+        <div class="coverage-item good"><span class="coverage-icon">✓</span><div class="coverage-text"><strong>Hardware defects</strong><span>Locks, cranks, hinges, and other hardware that fail due to a manufacturing defect are covered for 10 years.</span></div></div>
+        <div class="coverage-item good"><span class="coverage-icon">✓</span><div class="coverage-text"><strong>Wood deterioration (Lifestyle Series)</strong><span>Wood rot or deterioration due to manufacturing defect is covered under the lifetime warranty — not normal weathering without proper maintenance.</span></div></div>
+        <div class="coverage-item good"><span class="coverage-icon">✓</span><div class="coverage-text"><strong>Exterior finish cracking or peeling</strong><span>Aluminum cladding paint that cracks or peels in non-coastal environments is covered for 10 years on Lifestyle Series.</span></div></div>
+        <div class="coverage-item good"><span class="coverage-icon">✓</span><div class="coverage-text"><strong>Termite damage (Lifestyle Series)</strong><span>Specifically included — termite damage is covered under the Lifestyle Series warranty.</span></div></div>
+      </div>
+    </div>
+
+    <!-- IMPORTANT NOTES -->
+    <div class="breakdown-section">
+      <div class="breakdown-title">⚠️ Important conditions to know</div>
+      <div class="breakdown-sub">These are the warranty conditions that catch homeowners off guard most often.</div>
+      <div class="coverage-grid">
+        <div class="coverage-item note"><span class="coverage-icon">⚠</span><div class="coverage-text"><strong>Lifestyle Series — wood maintenance matters</strong><span>Most Lifestyle windows arrive pre-finished or primed from the factory. Pella's warranty excludes damage from failing to properly finish or maintain the wood over time. Keep up with cleaning and touch up the finish as needed to protect your coverage.</span></div></div>
+        <div class="coverage-item note"><span class="coverage-icon">⚠</span><div class="coverage-text"><strong>Labor is only covered for 2 years</strong><span>After 2 years, Pella will provide replacement parts but won't cover the cost of installation. You pay labor after year two.</span></div></div>
+        <div class="coverage-item note"><span class="coverage-icon">⚠</span><div class="coverage-text"><strong>Lifetime warranty is not transferable as-is</strong><span>When you sell your home, the lifetime warranty converts to a 10-year warranty starting from the original purchase date — not the sale date.</span></div></div>
+        <div class="coverage-item note"><span class="coverage-icon">⚠</span><div class="coverage-text"><strong>You must notify Pella within 1 year of discovering a defect</strong><span>Even if you're within the warranty period, waiting more than 1 year after discovering a problem can void the claim.</span></div></div>
+        <div class="coverage-item note"><span class="coverage-icon">⚠</span><div class="coverage-text"><strong>Installation must follow Pella's instructions</strong><span>If a defect is related to improper installation, the warranty can be voided. This is why Pella-certified installation matters.</span></div></div>
+        <div class="coverage-item note"><span class="coverage-icon">⚠</span><div class="coverage-text"><strong>Coastal homes (within 2 miles of coast) have different coverage</strong><span>Exterior paint coverage changes significantly for seacoast environments. If you're near a Great Lake shoreline, check this carefully.</span></div></div>
+      </div>
+    </div>
+
+    <!-- NOT COVERED -->
+    <div class="breakdown-section">
+      <div class="breakdown-title" style="color:var(--red)">✕ What is not covered (all series)</div>
+      <div class="breakdown-sub">These exclusions apply across all three product lines. Most are common sense, but a few are worth knowing upfront.</div>
+      <div class="not-covered-grid">
+        <div class="not-covered-item">Normal wear and fading over time</div>
+        <div class="not-covered-item">Accidental glass breakage</div>
+        <div class="not-covered-item">Damage from high indoor humidity (condensation, mold)</div>
+        <div class="not-covered-item">After-market window films applied to glass</div>
+        <div class="not-covered-item">Damage from improper cleaning chemicals or solvents</div>
+        <div class="not-covered-item">Products modified without Pella's approval</div>
+        <div class="not-covered-item">Hardware finish discoloration (the finish on locks/handles)</div>
+        <div class="not-covered-item">Screen damage from normal use or wear</div>
+        <div class="not-covered-item">Water infiltration due to improper wall design</div>
+        <div class="not-covered-item">Damage from acts of God or structural settlement</div>
+        <div class="not-covered-item">Products not paid for in full</div>
+        <div class="not-covered-item">Trim or carpentry work around replaced windows</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <h2>Questions about warranty coverage?</h2>
+      <p>We're happy to walk through what's covered for your specific project before you commit to anything. No pressure, just straight answers.</p>
+      <div class="cta-buttons">
+        <a href="build-a-quote.html" class="btn-white">Build A Quote →</a>
+        <a href="quick-quote.html" class="btn-outline">Quick Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="disclaimer">
+    This page summarizes Pella's warranty terms in plain language for informational purposes. It is not a substitute for the official warranty documents. Warranty terms are subject to change. For the complete, legally binding warranty terms, visit pella.com/warranty or contact Pella directly at 877-473-5527. Pella® is a registered trademark of Pella Corporation. Featherway Windows is an independent installer and is not affiliated with or endorsed by Pella Corporation.
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo"><img src="featherway-logo.png" alt="Featherway Windows"></a>
+    <ul class="footer-links">
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="pella.html">Pella Windows</a></li>
+      <li><a href="quick-quote.html">Quick Quote</a></li>
+      <li><a href="build-a-quote.html">Build A Quote</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 Featherway Windows. Metro Detroit's Simplest Window Quotes.</p>
+  </div>
+</footer>
+
+<script>
+function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+document.addEventListener('click', e => {
+  if (!e.target.closest('nav') && !e.target.closest('#mobileMenu'))
+    document.getElementById('mobileMenu').classList.remove('open');
+});
+</script>
+</body>
+</html>
