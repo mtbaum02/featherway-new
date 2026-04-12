@@ -614,10 +614,15 @@
             <div class="result-windows" id="resultWindows"></div>
             <div class="result-range" id="resultRange"></div>
             <div class="result-note">Estimated project range · Pella® certified installation included</div>
+          <div style="margin-top:16px;padding:14px;background:var(--sky);border-radius:8px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+            <div style="font-size:12px;color:var(--muted);font-weight:500">Estimated financing</div>
+            <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:var(--navy)" id="resultMonthly"></div>
+            <div style="font-size:11px;color:var(--muted);width:100%;line-height:1.5">Based on 10% APR / 120 months via Acorn Finance. Subject to credit approval. Estimate only — actual terms vary by lender and applicant.</div>
+          </div>
           </div>
 
           <div class="result-disclaimer">
-            This is a general estimate based on standard window sizes and a blended product mix. Your actual price depends on window sizes, styles, and options. For a precise quote tailored to your home, use Build A Quote below.
+            This is a general estimate based on standard window sizes and a blended product mix. Your actual price depends on window sizes, styles, and options. Projects involving wood/clad series windows, pocket installations that require new framing, or interior trim work may fall toward the higher end of the range or beyond. For a precise quote tailored to your home, use Build A Quote below.
           </div>
 
           <!-- STRONG BUILD A QUOTE PUSH -->
@@ -760,7 +765,7 @@ function calcPrice(count) {
   base = base * (1 - discount);
 
   const low = Math.round(base * (1 - RANGE_PCT) / 100) * 100;
-  const high = Math.round(base * (1 + RANGE_PCT) / 100) * 100;
+  const high = Math.round(base * 1.45 / 100) * 100;
   return { low, high };
 }
 
@@ -780,8 +785,15 @@ function changeCount(delta) {
 
 function showResults() {
   const { low, high } = calcPrice(windowCount);
+  // Monthly payment estimate: 10% APR / 120 months
+  const midpoint = (low + high) / 2;
+  const monthlyRate = 0.10 / 12;
+  const months = 120;
+  const monthly = Math.round(midpoint * monthlyRate / (1 - Math.pow(1 + monthlyRate, -months)));
+
   document.getElementById('resultWindows').textContent = windowCount + (windowCount === 1 ? ' Window' : ' Windows');
   document.getElementById('resultRange').textContent = fmt(low) + ' – ' + fmt(high);
+  document.getElementById('resultMonthly').textContent = '~$' + monthly.toLocaleString() + '/mo';
   document.getElementById('step1').style.display = 'none';
   document.getElementById('step2').style.display = 'block';
   document.getElementById('step3').style.display = 'none';
