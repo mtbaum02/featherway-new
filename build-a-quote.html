@@ -887,28 +887,14 @@ async function submitQuote() {
       console.log('Quote payload:', payload);
       await new Promise(r => setTimeout(r, 800));
     } else {
-      // Use a hidden form for reliable Formspree submission
-      const form = document.createElement('form');
-      form.method = 'POST';
-      form.action = FORMSPREE_URL;
-      form.style.display = 'none';
-      // Add hidden redirect back to success state
-      const redirectField = document.createElement('input');
-      redirectField.type = 'hidden';
-      redirectField.name = '_next';
-      redirectField.value = window.location.href + '?success=true';
-      form.appendChild(redirectField);
-      // Add all payload fields
-      for (const [key, val] of Object.entries(payload)) {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = key;
-        input.value = val;
-        form.appendChild(input);
-      }
-      document.body.appendChild(form);
-      form.submit();
-      return; // page will redirect
+      const res = await fetch(FORMSPREE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const resJson = await res.json();
+      if (resJson.errors) throw new Error(resJson.errors[0].message);
+      if (!res.ok) throw new Error('Submission failed — status ' + res.status);
     }
 
     localStorage.removeItem('featherway_baq');
